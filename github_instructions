@@ -8,3 +8,7 @@ https://www.linode.com/docs/development/version-control/how-to-install-git-on-li
 
 Main Library:
 tidyverse
+
+prevent Rstudio from asking for github credentials:
+https://stackoverflow.com/a/10583274
+

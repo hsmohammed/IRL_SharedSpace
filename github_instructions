@@ -12,3 +12,5 @@ tidyverse
 prevent Rstudio from asking for github credentials:
 https://stackoverflow.com/a/10583274
 
+commit and push from the terminal:
+

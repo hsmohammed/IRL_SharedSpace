@@ -1,5 +1,7 @@
 source("loadLibraries.R")
-Fn <- 29.97
+FN <- 29.97
+
+X1111 <- read.csv('Data/X-1-1-2-1111.csv',header = FALSE)
 X1111 <- X1111 %>% 
   gather(key = "measure_X", value = "X", 1:length(X1111))
 X1111$measure_X <- str_replace(X1111$measure_X,"V","")
@@ -28,7 +30,7 @@ VY1111 <- VY1111 %>%
 VY1111$measure_X <- str_replace(VY1111$measure_X,"V","")
 
 
-#1112
+#1112 
 
 X1112 <- read.csv('Data/X-1-1-2-9922.csv',header = FALSE)
 X1112 <- X1112 %>% 
@@ -614,7 +616,7 @@ Traj_Obj_11114 <- Traj_df_11114 %>%
   mutate(comp = "11114")
 
 #Merged DataFrame 
-
+Traj_Obj_111x_merged <- Traj_Obj_1111
 Traj_Obj_111x_merged <- full_join(Traj_Obj_1111,Traj_Obj_1112)
 Traj_Obj_111x_merged <- full_join(Traj_Obj_111x_merged,Traj_Obj_1113)
 Traj_Obj_111x_merged <- full_join(Traj_Obj_111x_merged,Traj_Obj_1114)

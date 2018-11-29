@@ -1,5 +1,5 @@
 for (i in 1:length(objects_1111$V1)) {
-  filename1 <- paste("plots/SP/SP_111x/SP_1111",objects_1111$V1[i],sep = "_")
+  filename1 <- paste("plots/SP_1",objects_1111$V1[i],sep = "_")
   fullname <- paste(filename1, ".jpg",sep = "")
   p1 <- Traj_Obj_111x_clipped2[(Traj_Obj_111x_clipped2$comp == "1111"&Traj_Obj_111x_clipped2$Obj == objects_1111$V1[i]),] %>% 
     ggplot()+

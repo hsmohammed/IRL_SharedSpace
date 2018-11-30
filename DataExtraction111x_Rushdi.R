@@ -400,49 +400,6 @@ names(Traj_df_11110)[4]<-paste("VX")
 names(Traj_df_11110)[5]<-paste("VY")
 names(Traj_df_11110)[6]<-paste("Obj")
 
-#11111
-
-Traj_df_11111 <- data.frame(X11111$X,Y11111$Y,F11111$F,VX11111$VX,VY11111$VY,X11111$measure_X)
-glimpse(Traj_df_11111)
-names(Traj_df_11111)[1]<-paste("X")
-names(Traj_df_11111)[2]<-paste("Y")
-names(Traj_df_11111)[3]<-paste("F")
-names(Traj_df_11111)[4]<-paste("VX")
-names(Traj_df_11111)[5]<-paste("VY")
-names(Traj_df_11111)[6]<-paste("Obj")
-
-#111112
-
-Traj_df_11112 <- data.frame(X11112$X,Y11112$Y,F11112$F,VX11112$VX,VY11112$VY,X11112$measure_X)
-glimpse(Traj_df_11112)
-names(Traj_df_11112)[1]<-paste("X")
-names(Traj_df_11112)[2]<-paste("Y")
-names(Traj_df_11112)[3]<-paste("F")
-names(Traj_df_11112)[4]<-paste("VX")
-names(Traj_df_11112)[5]<-paste("VY")
-names(Traj_df_11112)[6]<-paste("Obj")
-
-#11113
-
-Traj_df_11113 <- data.frame(X11113$X,Y11113$Y,F11113$F,VX11113$VX,VY11113$VY,X11113$measure_X)
-glimpse(Traj_df_11113)
-names(Traj_df_11113)[1]<-paste("X")
-names(Traj_df_11113)[2]<-paste("Y")
-names(Traj_df_11113)[3]<-paste("F")
-names(Traj_df_11113)[4]<-paste("VX")
-names(Traj_df_11113)[5]<-paste("VY")
-names(Traj_df_11113)[6]<-paste("Obj")
-
-#11114
-
-Traj_df_11114 <- data.frame(X11114$X,Y11114$Y,F11114$F,VX11114$VX,VY11114$VY,X11114$measure_X)
-glimpse(Traj_df_11114)
-names(Traj_df_11114)[1]<-paste("X")
-names(Traj_df_11114)[2]<-paste("Y")
-names(Traj_df_11114)[3]<-paste("F")
-names(Traj_df_11114)[4]<-paste("VX")
-names(Traj_df_11114)[5]<-paste("VY")
-names(Traj_df_11114)[6]<-paste("Obj")
 
 
 Traj_df_1111 <- Traj_df_1111 %>% 
@@ -525,37 +482,7 @@ Traj_df_11110 <- Traj_df_11110 %>%
   mutate(VY_mps = VY*FN)
 Traj_df_11110 <- Traj_df_11110[apply(Traj_df_11110[1],1,function(z) !any(z==0)),]
 
-Traj_df_11111 <- Traj_df_11111 %>% 
-  mutate(V = sqrt(VX^2+VY^2)) %>% 
-  mutate(V_kph = V*FN*3.6) %>% 
-  mutate(V_mps = V*FN) %>% 
-  mutate(VX_mps = VX*FN) %>% 
-  mutate(VY_mps = VY*FN)
-Traj_df_11111 <- Traj_df_11111[apply(Traj_df_11111[1],1,function(z) !any(z==0)),]
 
-Traj_df_11112 <- Traj_df_11112 %>% 
-  mutate(V = sqrt(VX^2+VY^2)) %>% 
-  mutate(V_kph = V*FN*3.6) %>% 
-  mutate(V_mps = V*FN) %>% 
-  mutate(VX_mps = VX*FN) %>% 
-  mutate(VY_mps = VY*FN)
-Traj_df_11112 <- Traj_df_11112[apply(Traj_df_11112[1],1,function(z) !any(z==0)),]
-
-Traj_df_11113 <- Traj_df_11113 %>% 
-  mutate(V = sqrt(VX^2+VY^2)) %>% 
-  mutate(V_kph = V*FN*3.6) %>% 
-  mutate(V_mps = V*FN) %>% 
-  mutate(VX_mps = VX*FN) %>% 
-  mutate(VY_mps = VY*FN)
-Traj_df_11113 <- Traj_df_11113[apply(Traj_df_11113[1],1,function(z) !any(z==0)),]
-
-Traj_df_11114 <- Traj_df_11114 %>% 
-  mutate(V = sqrt(VX^2+VY^2)) %>% 
-  mutate(V_kph = V*FN*3.6) %>% 
-  mutate(V_mps = V*FN) %>% 
-  mutate(VX_mps = VX*FN) %>% 
-  mutate(VY_mps = VY*FN)
-Traj_df_11114 <- Traj_df_11114[apply(Traj_df_11114[1],1,function(z) !any(z==0)),]
 
 #Filter Objects
 
@@ -599,21 +526,7 @@ Traj_Obj_11110 <- Traj_df_11110 %>%
   dplyr::filter(Traj_df_11110$Obj %in% objects_11110$V1) %>% 
   mutate(comp = "11110")
 
-Traj_Obj_11111 <- Traj_df_11111 %>% 
-  dplyr::filter(Traj_df_11111$Obj %in% objects_11111$V1) %>% 
-  mutate(comp = "11111")
 
-Traj_Obj_11112 <- Traj_df_11112 %>% 
-  dplyr::filter(Traj_df_11112$Obj %in% objects_11112$V1) %>% 
-  mutate(comp = "11112")
-
-Traj_Obj_11113 <- Traj_df_11113 %>% 
-  dplyr::filter(Traj_df_11113$Obj %in% objects_11113$V1) %>% 
-  mutate(comp = "11113")
-
-Traj_Obj_11114 <- Traj_df_11114 %>% 
-  dplyr::filter(Traj_df_11114$Obj %in% objects_11114$V1) %>% 
-  mutate(comp = "11114")
 
 #Merged DataFrame 
 Traj_Obj_111x_merged <- Traj_Obj_1111

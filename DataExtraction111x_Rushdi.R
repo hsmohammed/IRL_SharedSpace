@@ -277,7 +277,7 @@ VY11110 <- VY11110 %>%
 VY11110$measure_X <- str_replace(VY11110$measure_X,"V","")
 
 #Bicycle Object
-# add +1 to obj_Id obtained
+# add +1 to obj_Id in code
 objects_1111 <- read.csv(file = "Data/Objects/1111.csv", header = FALSE)
 objects_1111$V1 <- objects_1111$V1 +1
 objects_1112 <- read.csv(file = "Data/Objects/1112.csv", header = FALSE)
@@ -445,7 +445,7 @@ Traj_df_1114 <- Traj_df_1114 %>%
   mutate(VY_mps = VY*FN)
 Traj_df_1114 <- Traj_df_1114[apply(Traj_df_1114[1],1,function(z) !any(z==0)),]
 
-Traj_df_11FN <- Traj_df_11FN %>% 
+Traj_df_1115 <- Traj_df_1115 %>% 
   mutate(V = sqrt(VX^2+VY^2)) %>% 
   mutate(V_kph = V*FN*3.6) %>% 
   mutate(V_mps = V*FN) %>% 
@@ -549,10 +549,7 @@ Traj_Obj_111x_merged <- full_join(Traj_Obj_111x_merged,Traj_Obj_1117)
 Traj_Obj_111x_merged <- full_join(Traj_Obj_111x_merged,Traj_Obj_1118)
 Traj_Obj_111x_merged <- full_join(Traj_Obj_111x_merged,Traj_Obj_1119)
 Traj_Obj_111x_merged <- full_join(Traj_Obj_111x_merged,Traj_Obj_11110)
-Traj_Obj_111x_merged <- full_join(Traj_Obj_111x_merged,Traj_Obj_11111)
-Traj_Obj_111x_merged <- full_join(Traj_Obj_111x_merged,Traj_Obj_11112)
-Traj_Obj_111x_merged <- full_join(Traj_Obj_111x_merged,Traj_Obj_11113)
-Traj_Obj_111x_merged <- full_join(Traj_Obj_111x_merged,Traj_Obj_11114)
+
 
 Traj_Obj_111x_merged <- Traj_Obj_111x_merged %>%
   mutate(Obj_ID = paste(comp, Obj, sep = "_"))

@@ -300,34 +300,34 @@ objects_11110 <- read.csv(file = "Data/Objects/11110.csv", header = FALSE)
 objects_11110$V1 <- objects_11110$V1 +1
 
 
-names(objects_1111)[1]<-paste("obj")
+names(objects_1111)[1]<-paste("Obj")
 names(objects_1111)[2]<-paste("type")
 
-names(objects_1112)[1]<-paste("obj")
+names(objects_1112)[1]<-paste("Obj")
 names(objects_1112)[2]<-paste("type")
 
-names(objects_1113)[1]<-paste("obj")
+names(objects_1113)[1]<-paste("Obj")
 names(objects_1113)[2]<-paste("type")
 
-names(objects_1114)[1]<-paste("obj")
+names(objects_1114)[1]<-paste("Obj")
 names(objects_1114)[2]<-paste("type")
 
-names(objects_1115)[1]<-paste("obj")
+names(objects_1115)[1]<-paste("Obj")
 names(objects_1115)[2]<-paste("type")
 
-names(objects_1116)[1]<-paste("obj")
+names(objects_1116)[1]<-paste("Obj")
 names(objects_1116)[2]<-paste("type")
 
-names(objects_1117)[1]<-paste("obj")
+names(objects_1117)[1]<-paste("Obj")
 names(objects_1117)[2]<-paste("type")
 
-names(objects_1118)[1]<-paste("obj")
+names(objects_1118)[1]<-paste("Obj")
 names(objects_1118)[2]<-paste("type")
 
-names(objects_1119)[1]<-paste("obj")
+names(objects_1119)[1]<-paste("Obj")
 names(objects_1119)[2]<-paste("type")
 
-names(objects_11110)[1]<-paste("obj")
+names(objects_11110)[1]<-paste("Obj")
 names(objects_11110)[2]<-paste("type")
 
 
@@ -527,50 +527,172 @@ Traj_df_11110 <- Traj_df_11110[apply(Traj_df_11110[1],1,function(z) !any(z==0)),
 
 
 #Filter Objects
+# 1111
+Traj_df_1111 <- as.tibble(Traj_df_1111)
+Traj_df_1111$Obj <- as.character(Traj_df_1111$Obj)
+objects_1111$Obj <- factor(objects_1111$Obj)
+
 
 Traj_Obj_1111 <- Traj_df_1111 %>% 
-  dplyr::filter(Traj_df_1111$Obj %in% objects_1111$V1) %>% 
+  dplyr::filter(Traj_df_1111$Obj %in% objects_1111$Obj) %>% 
   mutate(comp = "1111")
-names(objects_1111)[1]<-paste("obj")
-names(objects_1111)[2]<-paste("type")
 
-Traj_Obj_1111x <- inner_join(Traj_Obj_1111,objects_1111,by = "obj")
+Traj_Obj_1111$Obj <- factor(Traj_Obj_1111$Obj)
+
+levels(Traj_Obj_1111$Obj) <- levels(objects_1111$Obj)
+Traj_Obj_1111x <- inner_join(Traj_Obj_1111,objects_1111, by = "Obj")
+
+# 1112
+Traj_df_1112 <- as.tibble(Traj_df_1112)
+Traj_df_1112$Obj <- as.character(Traj_df_1112$Obj)
+objects_1112$Obj <- factor(objects_1112$Obj)
+
 
 Traj_Obj_1112 <- Traj_df_1112 %>% 
-  dplyr::filter(Traj_df_1112$Obj %in% objects_1112$V1) %>% 
+  dplyr::filter(Traj_df_1112$Obj %in% objects_1112$Obj) %>% 
   mutate(comp = "1112")
 
+Traj_Obj_1112$Obj <- factor(Traj_Obj_1112$Obj)
+
+levels(Traj_Obj_1112$Obj) <- levels(objects_1112$Obj)
+Traj_Obj_1112x <- inner_join(Traj_Obj_1112,objects_1112, by = "Obj")
+
+# 1113
+
+Traj_df_1113 <- as.tibble(Traj_df_1113)
+Traj_df_1113$Obj <- as.character(Traj_df_1113$Obj)
+objects_1113$Obj <- factor(objects_1113$Obj)
+
+
 Traj_Obj_1113 <- Traj_df_1113 %>% 
-  dplyr::filter(Traj_df_1113$Obj %in% objects_1113$V1) %>% 
+  dplyr::filter(Traj_df_1113$Obj %in% objects_1113$Obj) %>% 
   mutate(comp = "1113")
 
+Traj_Obj_1113$Obj <- factor(Traj_Obj_1113$Obj)
+
+levels(Traj_Obj_1113$Obj) <- levels(objects_1113$Obj)
+Traj_Obj_1113x <- inner_join(Traj_Obj_1113,objects_1113, by = "Obj")
+
+# 1114
+
+Traj_df_1114 <- as.tibble(Traj_df_1114)
+Traj_df_1114$Obj <- as.character(Traj_df_1114$Obj)
+objects_1114$Obj <- factor(objects_1114$Obj)
+
+
 Traj_Obj_1114 <- Traj_df_1114 %>% 
-  dplyr::filter(Traj_df_1114$Obj %in% objects_1114$V1) %>% 
+  dplyr::filter(Traj_df_1114$Obj %in% objects_1114$Obj) %>% 
   mutate(comp = "1114")
 
+Traj_Obj_1114$Obj <- factor(Traj_Obj_1114$Obj)
+
+levels(Traj_Obj_1114$Obj) <- levels(objects_1114$Obj)
+Traj_Obj_1114x <- inner_join(Traj_Obj_1114,objects_1114, by = "Obj")
+
+# 1115
+
+
+Traj_df_1115 <- as.tibble(Traj_df_1115)
+Traj_df_1115$Obj <- as.character(Traj_df_1115$Obj)
+objects_1115$Obj <- factor(objects_1115$Obj)
+
+
 Traj_Obj_1115 <- Traj_df_1115 %>% 
-  dplyr::filter(Traj_df_1115$Obj %in% objects_1115$V1) %>% 
+  dplyr::filter(Traj_df_1115$Obj %in% objects_1115$Obj) %>% 
   mutate(comp = "1115")
 
+Traj_Obj_1115$Obj <- factor(Traj_Obj_1115$Obj)
+
+levels(Traj_Obj_1115$Obj) <- levels(objects_1115$Obj)
+Traj_Obj_1115x <- inner_join(Traj_Obj_1115,objects_1115, by = "Obj")
+
+# 1116
+
+
+Traj_df_1116 <- as.tibble(Traj_df_1116)
+Traj_df_1116$Obj <- as.character(Traj_df_1116$Obj)
+objects_1116$Obj <- factor(objects_1116$Obj)
+
+
 Traj_Obj_1116 <- Traj_df_1116 %>% 
-  dplyr::filter(Traj_df_1116$Obj %in% objects_1116$V1) %>% 
+  dplyr::filter(Traj_df_1116$Obj %in% objects_1116$Obj) %>% 
   mutate(comp = "1116")
 
+Traj_Obj_1116$Obj <- factor(Traj_Obj_1116$Obj)
+
+levels(Traj_Obj_1116$Obj) <- levels(objects_1116$Obj)
+Traj_Obj_1116x <- inner_join(Traj_Obj_1116,objects_1116, by = "Obj")
+
+
+
+# 1117
+
+
+Traj_df_1117 <- as.tibble(Traj_df_1117)
+Traj_df_1117$Obj <- as.character(Traj_df_1117$Obj)
+objects_1117$Obj <- factor(objects_1117$Obj)
+
+
 Traj_Obj_1117 <- Traj_df_1117 %>% 
-  dplyr::filter(Traj_df_1117$Obj %in% objects_1117$V1) %>% 
+  dplyr::filter(Traj_df_1117$Obj %in% objects_1117$Obj) %>% 
   mutate(comp = "1117")
 
+Traj_Obj_1117$Obj <- factor(Traj_Obj_1117$Obj)
+
+levels(Traj_Obj_1117$Obj) <- levels(objects_1117$Obj)
+Traj_Obj_1117x <- inner_join(Traj_Obj_1117,objects_1117, by = "Obj")
+
+# 1118
+
+
+Traj_df_1118 <- as.tibble(Traj_df_1118)
+Traj_df_1118$Obj <- as.character(Traj_df_1118$Obj)
+objects_1118$Obj <- factor(objects_1118$Obj)
+
+
 Traj_Obj_1118 <- Traj_df_1118 %>% 
-  dplyr::filter(Traj_df_1118$Obj %in% objects_1118$V1) %>% 
+  dplyr::filter(Traj_df_1118$Obj %in% objects_1118$Obj) %>% 
   mutate(comp = "1118")
 
+Traj_Obj_1118$Obj <- factor(Traj_Obj_1118$Obj)
+
+levels(Traj_Obj_1118$Obj) <- levels(objects_1118$Obj)
+Traj_Obj_1118x <- inner_join(Traj_Obj_1118,objects_1118, by = "Obj")
+
+#1119
+
+
+Traj_df_1119 <- as.tibble(Traj_df_1119)
+Traj_df_1119$Obj <- as.character(Traj_df_1119$Obj)
+objects_1119$Obj <- factor(objects_1119$Obj)
+
+
 Traj_Obj_1119 <- Traj_df_1119 %>% 
-  dplyr::filter(Traj_df_1119$Obj %in% objects_1119$V1) %>% 
+  dplyr::filter(Traj_df_1119$Obj %in% objects_1119$Obj) %>% 
   mutate(comp = "1119")
 
+Traj_Obj_1119$Obj <- factor(Traj_Obj_1119$Obj)
+
+levels(Traj_Obj_1119$Obj) <- levels(objects_1119$Obj)
+Traj_Obj_1119x <- inner_join(Traj_Obj_1119,objects_1119, by = "Obj")
+
+
+# 11110
+
+
+Traj_df_11110 <- as.tibble(Traj_df_11110)
+Traj_df_11110$Obj <- as.character(Traj_df_11110$Obj)
+objects_11110$Obj <- factor(objects_11110$Obj)
+
+
 Traj_Obj_11110 <- Traj_df_11110 %>% 
-  dplyr::filter(Traj_df_11110$Obj %in% objects_11110$V1) %>% 
+  dplyr::filter(Traj_df_11110$Obj %in% objects_11110$Obj) %>% 
   mutate(comp = "11110")
+
+Traj_Obj_11110$Obj <- factor(Traj_Obj_11110$Obj)
+
+levels(Traj_Obj_11110$Obj) <- levels(objects_11110$Obj)
+Traj_Obj_11110x <- inner_join(Traj_Obj_11110,objects_11110, by = "Obj")
 
 
 

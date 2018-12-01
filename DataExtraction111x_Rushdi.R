@@ -300,6 +300,37 @@ objects_11110 <- read.csv(file = "Data/Objects/11110.csv", header = FALSE)
 objects_11110$V1 <- objects_11110$V1 +1
 
 
+names(objects_1111)[1]<-paste("obj")
+names(objects_1111)[2]<-paste("type")
+
+names(objects_1112)[1]<-paste("obj")
+names(objects_1112)[2]<-paste("type")
+
+names(objects_1113)[1]<-paste("obj")
+names(objects_1113)[2]<-paste("type")
+
+names(objects_1114)[1]<-paste("obj")
+names(objects_1114)[2]<-paste("type")
+
+names(objects_1115)[1]<-paste("obj")
+names(objects_1115)[2]<-paste("type")
+
+names(objects_1116)[1]<-paste("obj")
+names(objects_1116)[2]<-paste("type")
+
+names(objects_1117)[1]<-paste("obj")
+names(objects_1117)[2]<-paste("type")
+
+names(objects_1118)[1]<-paste("obj")
+names(objects_1118)[2]<-paste("type")
+
+names(objects_1119)[1]<-paste("obj")
+names(objects_1119)[2]<-paste("type")
+
+names(objects_11110)[1]<-paste("obj")
+names(objects_11110)[2]<-paste("type")
+
+
 
 #1111
 
@@ -500,6 +531,10 @@ Traj_df_11110 <- Traj_df_11110[apply(Traj_df_11110[1],1,function(z) !any(z==0)),
 Traj_Obj_1111 <- Traj_df_1111 %>% 
   dplyr::filter(Traj_df_1111$Obj %in% objects_1111$V1) %>% 
   mutate(comp = "1111")
+names(objects_1111)[1]<-paste("obj")
+names(objects_1111)[2]<-paste("type")
+
+Traj_Obj_1111x <- inner_join(Traj_Obj_1111,objects_1111,by = "obj")
 
 Traj_Obj_1112 <- Traj_df_1112 %>% 
   dplyr::filter(Traj_df_1112$Obj %in% objects_1112$V1) %>% 

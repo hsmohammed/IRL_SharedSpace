@@ -1,3 +1,4 @@
+FN <- 29.97
 Traj_Obj_111x_clipped <- Traj_Obj_111x_merged
 Traj_Obj_111x_clipped2 <- Traj_Obj_111x_clipped %>% 
   group_by(comp) %>% 
@@ -13,8 +14,8 @@ Traj_Obj_111x_clipped2 <- Traj_Obj_111x_clipped %>%
   dplyr::mutate(acc_inst = (lead(speed_SGF, default = NA)-speed_SGF)*FN) %>% 
   dplyr::mutate(acc_inst_x = (lead(speed_x_SGF, default = NA)-speed_x_SGF)*FN) %>% 
   dplyr::mutate(acc_inst_y = (lead(speed_y_SGF, default = NA)-speed_y_SGF)*FN) %>% 
-  dplyr::mutate(yawAngle = asin((lag(X_SGF, default = NA )-X_SGF)/(sqrt((lag(X_SGF, default = NA )-X_SGF)^2+(lag(Y_SGF, default = NA )-Y_SGF)^2)))) %>% 
-  dplyr::mutate(lateral_distance_to_edge = abs(X_SGF-53))
+  dplyr::mutate(yawAngle = asin((lag(X_SGF, default = NA )-X_SGF)/(sqrt((lag(X_SGF, default = NA )-X_SGF)^2+(lag(Y_SGF, default = NA )-Y_SGF)^2)))) 
+  # dplyr::mutate(lateral_distance_to_edge = abs(X_SGF-53))
 
 Traj_Obj_111x_clipped2$Obj_ID <- factor(Traj_Obj_111x_clipped2$Obj_ID)  
 
@@ -46,7 +47,6 @@ Traj_Obj_111x_clipped2 <- Traj_Obj_111x_clipped2 %>%
   group_by(Obj_ID) %>%
   mutate(jerk_SGF = sgolayfilt(jerk,p = 4,n = 15))
 
-Traj_Obj_111x_clipped2 <- subset(Traj_Obj_111x_clipped2,(Traj_Obj_111x_clipped2$Y < 80&Traj_Obj_111x_clipped2$Y > 30))
 
 
 

@@ -697,15 +697,15 @@ Traj_Obj_11110x <- inner_join(Traj_Obj_11110,objects_11110, by = "Obj")
 
 
 #Merged DataFrame 
-Traj_Obj_111x_merged <- full_join(Traj_Obj_1111,Traj_Obj_1112)
-Traj_Obj_111x_merged <- full_join(Traj_Obj_111x_merged,Traj_Obj_1113)
-Traj_Obj_111x_merged <- full_join(Traj_Obj_111x_merged,Traj_Obj_1114)
-Traj_Obj_111x_merged <- full_join(Traj_Obj_111x_merged,Traj_Obj_1115)
-Traj_Obj_111x_merged <- full_join(Traj_Obj_111x_merged,Traj_Obj_1116)
-Traj_Obj_111x_merged <- full_join(Traj_Obj_111x_merged,Traj_Obj_1117)
-Traj_Obj_111x_merged <- full_join(Traj_Obj_111x_merged,Traj_Obj_1118)
-Traj_Obj_111x_merged <- full_join(Traj_Obj_111x_merged,Traj_Obj_1119)
-Traj_Obj_111x_merged <- full_join(Traj_Obj_111x_merged,Traj_Obj_11110)
+Traj_Obj_111x_merged <- full_join(Traj_Obj_1111x,Traj_Obj_1112x)
+Traj_Obj_111x_merged <- full_join(Traj_Obj_111x_merged,Traj_Obj_1113x)
+Traj_Obj_111x_merged <- full_join(Traj_Obj_111x_merged,Traj_Obj_1114x)
+Traj_Obj_111x_merged <- full_join(Traj_Obj_111x_merged,Traj_Obj_1115x)
+Traj_Obj_111x_merged <- full_join(Traj_Obj_111x_merged,Traj_Obj_1116x)
+Traj_Obj_111x_merged <- full_join(Traj_Obj_111x_merged,Traj_Obj_1117x)
+Traj_Obj_111x_merged <- full_join(Traj_Obj_111x_merged,Traj_Obj_1118x)
+Traj_Obj_111x_merged <- full_join(Traj_Obj_111x_merged,Traj_Obj_1119x)
+Traj_Obj_111x_merged <- full_join(Traj_Obj_111x_merged,Traj_Obj_11110x)
 
 
 Traj_Obj_111x_merged <- Traj_Obj_111x_merged %>%

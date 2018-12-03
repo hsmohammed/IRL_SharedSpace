@@ -15,10 +15,10 @@ for (i in 1:length(objects_1111$Obj)) {
     ggplot(aes(X_SGF,Y_SGF, col = type, group = Obj))+
     annotation_custom(rasterGrob(ima_212, width = unit(1,"npc"), 
                                  height = unit(1,"npc")), 
-                      0, 108, 0, 74)+
+                      0, 100, 0, 67)+
     geom_path(na.rm = TRUE, arrow = arrow1, size = 1) +
-    scale_x_continuous(limits = c(0,108), expand = c(0,0))+
-    scale_y_continuous(limits = c(0,93), expand = c(0,0))
+    scale_x_continuous(limits = c(0,100), expand = c(0,0))+
+    scale_y_continuous(limits = c(0,67), expand = c(0,0))
   ggsave(filename = fullname,p1)
 }
 
@@ -29,10 +29,10 @@ for (i in 1:length(objects_1112$Obj)) {
     ggplot(aes(X_SGF,Y_SGF, col = type, group = Obj))+
     annotation_custom(rasterGrob(ima_212, width = unit(1,"npc"), 
                                  height = unit(1,"npc")), 
-                      0, 108, 0, 74)+
+                      0, 100, 0, 67)+
     geom_path(na.rm = TRUE, arrow = arrow1, size = 1) +
-    scale_x_continuous(limits = c(0,108), expand = c(0,0))+
-    scale_y_continuous(limits = c(0,93), expand = c(0,0))
+    scale_x_continuous(limits = c(0,100), expand = c(0,0))+
+    scale_y_continuous(limits = c(0,67), expand = c(0,0))
   ggsave(filename = fullname,p1)
 }
 
@@ -43,10 +43,10 @@ for (i in 1:length(objects_1113$Obj)) {
     ggplot(aes(X_SGF,Y_SGF, col = type, group = Obj))+
     annotation_custom(rasterGrob(ima_212, width = unit(1,"npc"), 
                                  height = unit(1,"npc")), 
-                      0, 108, 0, 74)+
+                      0, 100, 0, 67)+
     geom_path(na.rm = TRUE, arrow = arrow1, size = 1) +
-    scale_x_continuous(limits = c(0,108), expand = c(0,0))+
-    scale_y_continuous(limits = c(0,93), expand = c(0,0))
+    scale_x_continuous(limits = c(0,100), expand = c(0,0))+
+    scale_y_continuous(limits = c(0,67), expand = c(0,0))
   ggsave(filename = fullname,p1)
 }
 
@@ -57,10 +57,10 @@ for (i in 1:length(objects_1114$Obj)) {
     ggplot(aes(X_SGF,Y_SGF, col = type, group = Obj))+
     annotation_custom(rasterGrob(ima_212, width = unit(1,"npc"), 
                                  height = unit(1,"npc")), 
-                      0, 108, 0, 74)+
+                      0, 100, 0, 67)+
     geom_path(na.rm = TRUE, arrow = arrow1, size = 1) +
-    scale_x_continuous(limits = c(0,108), expand = c(0,0))+
-    scale_y_continuous(limits = c(0,93), expand = c(0,0))
+    scale_x_continuous(limits = c(0,100), expand = c(0,0))+
+    scale_y_continuous(limits = c(0,67), expand = c(0,0))
   ggsave(filename = fullname,p1)
 }
 
@@ -71,10 +71,10 @@ for (i in 1:length(objects_1115$Obj)) {
     ggplot(aes(X_SGF,Y_SGF, col = type, group = Obj))+
     annotation_custom(rasterGrob(ima_212, width = unit(1,"npc"), 
                                  height = unit(1,"npc")), 
-                      0, 108, 0, 74)+
+                      0, 100, 0, 67)+
     geom_path(na.rm = TRUE, arrow = arrow1, size = 1) +
-    scale_x_continuous(limits = c(0,108), expand = c(0,0))+
-    scale_y_continuous(limits = c(0,93), expand = c(0,0))
+    scale_x_continuous(limits = c(0,100), expand = c(0,0))+
+    scale_y_continuous(limits = c(0,67), expand = c(0,0))
   ggsave(filename = fullname,p1)
 }
 
@@ -85,10 +85,10 @@ for (i in 1:length(objects_1116$Obj)) {
     ggplot(aes(X_SGF,Y_SGF, col = type, group = Obj))+
     annotation_custom(rasterGrob(ima_212, width = unit(1,"npc"), 
                                  height = unit(1,"npc")), 
-                      0, 108, 0, 74)+
+                      0, 100, 0, 67)+
     geom_path(na.rm = TRUE, arrow = arrow1, size = 1) +
-    scale_x_continuous(limits = c(0,108), expand = c(0,0))+
-    scale_y_continuous(limits = c(0,93), expand = c(0,0))
+    scale_x_continuous(limits = c(0,100), expand = c(0,0))+
+    scale_y_continuous(limits = c(0,67), expand = c(0,0))
   ggsave(filename = fullname,p1)
 }
 
@@ -99,10 +99,10 @@ for (i in 1:length(objects_1117$Obj)) {
     ggplot(aes(X_SGF,Y_SGF, col = type, group = Obj))+
     annotation_custom(rasterGrob(ima_212, width = unit(1,"npc"), 
                                  height = unit(1,"npc")), 
-                      0, 108, 0, 74)+
+                      0, 100, 0, 67)+
     geom_path(na.rm = TRUE, arrow = arrow1, size = 1) +
-    scale_x_continuous(limits = c(0,108), expand = c(0,0))+
-    scale_y_continuous(limits = c(0,93), expand = c(0,0))
+    scale_x_continuous(limits = c(0,100), expand = c(0,0))+
+    scale_y_continuous(limits = c(0,67), expand = c(0,0))
   ggsave(filename = fullname,p1)
 }
 
@@ -113,10 +113,10 @@ for (i in 1:length(objects_1118$Obj)) {
     ggplot(aes(X_SGF,Y_SGF, col = type, group = Obj))+
     annotation_custom(rasterGrob(ima_212, width = unit(1,"npc"), 
                                  height = unit(1,"npc")), 
-                      0, 108, 0, 74)+
+                      0, 100, 0, 67)+
     geom_path(na.rm = TRUE, arrow = arrow1, size = 1) +
-    scale_x_continuous(limits = c(0,108), expand = c(0,0))+
-    scale_y_continuous(limits = c(0,93), expand = c(0,0))
+    scale_x_continuous(limits = c(0,100), expand = c(0,0))+
+    scale_y_continuous(limits = c(0,67), expand = c(0,0))
   ggsave(filename = fullname,p1)
 }
 
@@ -127,10 +127,10 @@ for (i in 1:length(objects_1119$Obj)) {
     ggplot(aes(X_SGF,Y_SGF, col = type, group = Obj))+
     annotation_custom(rasterGrob(ima_212, width = unit(1,"npc"), 
                                  height = unit(1,"npc")), 
-                      0, 108, 0, 74)+
+                      0, 100, 0, 67)+
     geom_path(na.rm = TRUE, arrow = arrow1, size = 1) +
-    scale_x_continuous(limits = c(0,108), expand = c(0,0))+
-    scale_y_continuous(limits = c(0,93), expand = c(0,0))
+    scale_x_continuous(limits = c(0,100), expand = c(0,0))+
+    scale_y_continuous(limits = c(0,67), expand = c(0,0))
   ggsave(filename = fullname,p1)
 }
 
@@ -141,10 +141,10 @@ for (i in 1:length(objects_11110$Obj)) {
     ggplot(aes(X_SGF,Y_SGF, col = type, group = Obj))+
     annotation_custom(rasterGrob(ima_212, width = unit(1,"npc"), 
                                  height = unit(1,"npc")), 
-                      0, 108, 0, 74)+
+                      0, 100, 0, 67)+
     geom_path(na.rm = TRUE, arrow = arrow1, size = 1) +
-    scale_x_continuous(limits = c(0,108), expand = c(0,0))+
-    scale_y_continuous(limits = c(0,93), expand = c(0,0))
+    scale_x_continuous(limits = c(0,100), expand = c(0,0))+
+    scale_y_continuous(limits = c(0,67), expand = c(0,0))
   ggsave(filename = fullname,p1)
 }
 
@@ -152,9 +152,9 @@ p1 <- Traj_Obj_212x_clipped2_dir2 %>%
   ggplot()+
   annotation_custom(rasterGrob(ima_212, width = unit(1,"npc"), 
                                height = unit(1,"npc")), 
-                    0, 108, 0, 74)+
+                    0, 100, 0, 67)+
   geom_point(aes(x=X,y=Y, col = V_mps_corrected, group = Obj,na.rm = TRUE)) +  
   scale_color_distiller(palette = "RdYlGn",direction = 1)+
-  scale_x_continuous(limits = c(0,108), expand = c(0,0))+
-  scale_y_continuous(limits = c(0,93), expand = c(0,0))
+  scale_x_continuous(limits = c(0,100), expand = c(0,0))+
+  scale_y_continuous(limits = c(0,67), expand = c(0,0))
 ggsave("plots/212.jpg",p1)

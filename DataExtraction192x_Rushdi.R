@@ -280,8 +280,8 @@ VY1111$measure_X <- str_replace(VY1111$measure_X,"V","")
 
 # Object
 # add +1 to obj_Id in code
-objects_1111 <- read.csv(file = "Data/Objects/1-9-2-16.csv", header = FALSE)
-objects_1111$V1 <- objects_1111$V1 +1
+objects_1111 <- read.csv(file = "Data/Objects/1-9-2-16.csv", header = T)
+objects_1111$Obj <- objects_1111$Obj +1
 # objects_1112 <- read.csv(file = "Data/Objects/1112.csv", header = FALSE)
 # objects_1112$V1 <- objects_1112$V1 +1
 # objects_1113 <- read.csv(file = "Data/Objects/1113.csv",header = FALSE)
@@ -698,8 +698,8 @@ Traj_Obj_1111x <- inner_join(Traj_Obj_1111,objects_1111, by = "Obj")
 
 
 
-#Merged DataFrame 
-Traj_Obj_192x_merged <- full_join(Traj_Obj_1111x,Traj_Obj_1112x)
+#Merged DataFrame
+Traj_Obj_192x_merged <- Traj_Obj_1111x
 # Traj_Obj_111x_merged <- full_join(Traj_Obj_111x_merged,Traj_Obj_1113x)
 # Traj_Obj_111x_merged <- full_join(Traj_Obj_111x_merged,Traj_Obj_1114x)
 # Traj_Obj_111x_merged <- full_join(Traj_Obj_111x_merged,Traj_Obj_1115x)

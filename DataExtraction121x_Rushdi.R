@@ -699,7 +699,7 @@ Traj_Obj_1111x <- inner_join(Traj_Obj_1111,objects_1111, by = "Obj")
 
 
 #Merged DataFrame 
-Traj_Obj_121x_merged <- full_join(Traj_Obj_1111x,Traj_Obj_1112x)
+Traj_Obj_121x_merged <- Traj_Obj_1111x
 # Traj_Obj_111x_merged <- full_join(Traj_Obj_111x_merged,Traj_Obj_1113x)
 # Traj_Obj_111x_merged <- full_join(Traj_Obj_111x_merged,Traj_Obj_1114x)
 # Traj_Obj_111x_merged <- full_join(Traj_Obj_111x_merged,Traj_Obj_1115x)

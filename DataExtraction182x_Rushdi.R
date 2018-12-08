@@ -280,12 +280,12 @@ VY1113$measure_X <- str_replace(VY1113$measure_X,"V","")
 
 # Object
 # add +1 to obj_Id in code
-objects_1111 <- read.csv(file = "Data/Objects/1-8-2-27.csv", header = FALSE)
-objects_1111$V1 <- objects_1111$V1 +1
-objects_1112 <- read.csv(file = "Data/Objects/1-8-2-28.csv", header = FALSE)
-objects_1112$V1 <- objects_1112$V1 +1
-objects_1113 <- read.csv(file = "Data/Objects/1-8-2-29.csv",header = FALSE)
-objects_1113$V1 <- objects_1113$V1 +1
+objects_1111 <- read.csv(file = "Data/Objects/1-8-2-27.csv", header = T)
+objects_1111$V1 <- objects_1111$Obj +1
+objects_1112 <- read.csv(file = "Data/Objects/1-8-2-28.csv", header = T)
+objects_1112$V1 <- objects_1112$Obj +1
+objects_1113 <- read.csv(file = "Data/Objects/1-8-2-29.csv",header = T)
+objects_1113$V1 <- objects_1113$Obj +1
 # objects_1114 <- read.csv(file = "Data/Objects/1114.csv", header = FALSE)
 # objects_1114$V1 <- objects_1114$V1 +1
 # objects_1115 <- read.csv(file = "Data/Objects/1115.csv",header = FALSE)

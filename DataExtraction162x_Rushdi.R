@@ -279,14 +279,14 @@ VY1114$measure_X <- str_replace(VY1114$measure_X,"V","")
 
 #Bicycle Object
 # add +1 to obj_Id in code
-objects_1111 <- read.csv(file = "Data/Objects/1-6-2-19.csv", header = FALSE)
-objects_1111$V1 <- objects_1111$V1 +1
-objects_1112 <- read.csv(file = "Data/Objects/1-6-2-20.csv", header = FALSE)
-objects_1112$V1 <- objects_1112$V1 +1
-objects_1113 <- read.csv(file = "Data/Objects/1-6-2-22.csv",header = FALSE)
-objects_1113$V1 <- objects_1113$V1 +1
-objects_1114 <- read.csv(file = "Data/Objects/1-6-2-23.csv", header = FALSE)
-objects_1114$V1 <- objects_1114$V1 +1
+objects_1111 <- read.csv(file = "Data/Objects/1-6-2-19.csv", header = T)
+objects_1111$obj <- objects_1111$obj +1
+objects_1112 <- read.csv(file = "Data/Objects/1-6-2-20.csv", header = T)
+objects_1112$obj <- objects_1112$obj +1
+objects_1113 <- read.csv(file = "Data/Objects/1-6-2-22.csv",header = T)
+objects_1113$obj <- objects_1113$obj +1
+objects_1114 <- read.csv(file = "Data/Objects/1-6-2-23.csv", header = T)
+objects_1114$obj <- objects_1114$obj +1
 # objects_1115 <- read.csv(file = "Data/Objects/1115.csv",header = FALSE)
 # objects_1115$V1 <- objects_1115$V1 +1
 # objects_1116 <- read.csv(file = "Data/Objects/1116.csv", header = FALSE)

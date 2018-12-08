@@ -1,4 +1,5 @@
 pix: 
 Robson study 
-RB= 14.2736
-RA= 11.7541
+RB= 14.2736   (days 1 to 5)
+
+RA= 11.7541   (days 6 to 9)

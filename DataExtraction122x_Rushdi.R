@@ -33,7 +33,7 @@ VY1111$measure_X <- str_replace(VY1111$measure_X,"V","")
 
 #1-2-2-3 
 
-X1112 <- read.csv('Data/X-1-2-2-3.csv.csv',header = FALSE)
+X1112 <- read.csv('Data/X-1-2-2-3.csv',header = FALSE)
 X1112 <- X1112 %>% 
   gather(key = "measure_X", value = "X", 1:length(X1112))
 X1112$measure_X <- str_replace(X1112$measure_X,"V","")
@@ -279,24 +279,24 @@ VY1119$measure_X <- str_replace(VY1119$measure_X,"V","")
 
 # Object
 # add +1 to obj_Id in code
-objects_1111 <- read.csv(file = "Data/Objects/1-2-2-1.csv", header = FALSE)
-objects_1111$V1 <- objects_1111$V1 +1
-objects_1112 <- read.csv(file = "Data/Objects/1-2-2-3.csv", header = FALSE)
-objects_1112$V1 <- objects_1112$V1 +1
-objects_1113 <- read.csv(file = "Data/Objects/1-2-2-12.csv",header = FALSE)
-objects_1113$V1 <- objects_1113$V1 +1
-objects_1114 <- read.csv(file = "Data/Objects/1-2-2-20.csv", header = FALSE)
-objects_1114$V1 <- objects_1114$V1 +1
-objects_1115 <- read.csv(file = "Data/Objects/1-2-2-21.csv",header = FALSE)
-objects_1115$V1 <- objects_1115$V1 +1
-objects_1116 <- read.csv(file = "Data/Objects/1-2-2-27.csv", header = FALSE)
-objects_1116$V1 <- objects_1116$V1 +1
-objects_1117 <- read.csv(file = "Data/Objects/1-2-2-40.csv",header = FALSE)
-objects_1117$V1 <- objects_1117$V1 +1
-objects_1118 <- read.csv(file = "Data/Objects/1-2-2-41.csv", header = FALSE)
-objects_1118$V1 <- objects_1118$V1 +1
-objects_1119 <- read.csv(file = "Data/Objects/1-2-2-3232.csv",header = FALSE)
-objects_1119$V1 <- objects_1119$V1 +1
+objects_1111 <- read.csv(file = "Data/Objects/1-2-2-1.csv", header = T)
+objects_1111$obj <- objects_1111$obj +1
+objects_1112 <- read.csv(file = "Data/Objects/1-2-2-3.csv", header = T)
+objects_1112$obj <- objects_1112$obj +1
+objects_1113 <- read.csv(file = "Data/Objects/1-2-2-12.csv",header = T)
+objects_1113$obj <- objects_1113$obj +1
+objects_1114 <- read.csv(file = "Data/Objects/1-2-2-20.csv", header = T)
+objects_1114$obj <- objects_1114$obj +1
+objects_1115 <- read.csv(file = "Data/Objects/1-2-2-21.csv",header = T)
+objects_1115$obj <- objects_1115$obj +1
+objects_1116 <- read.csv(file = "Data/Objects/1-2-2-27.csv", header = T)
+objects_1116$obj <- objects_1116$obj +1
+objects_1117 <- read.csv(file = "Data/Objects/1-2-2-40.csv",header = T)
+objects_1117$obj <- objects_1117$obj +1
+objects_1118 <- read.csv(file = "Data/Objects/1-2-2-41.csv", header = T)
+objects_1118$obj <- objects_1118$obj +1
+objects_1119 <- read.csv(file = "Data/Objects/1-2-2-3232.csv",header = T)
+objects_1119$obj <- objects_1119$obj +1
 # objects_11110 <- read.csv(file = "Data/Objects/11110.csv", header = FALSE)
 # objects_11110$V1 <- objects_11110$V1 +1
 

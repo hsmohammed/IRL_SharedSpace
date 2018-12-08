@@ -8,25 +8,25 @@ X1111 <- X1111 %>%
   gather(key = "measure_X", value = "X", 1:length(X1111))
 X1111$measure_X <- str_replace(X1111$measure_X,"V","")
 
-Y1111 <- read.csv('Data/Y-1-1-2-1.csv',header = FALSE)
+Y1111 <- read.csv('Data/Y-1-2-1-1.csv',header = FALSE)
 Y1111 <- Y1111 %>% 
   gather(key = "measure_X", value = "Y", 1:length(Y1111))
 Y1111$measure_X <- str_replace(Y1111$measure_X,"V","")
 
 
-F1111 <- read.csv('Data/F-1-1-2-1.csv',header = FALSE)
+F1111 <- read.csv('Data/F-1-2-1-1.csv',header = FALSE)
 F1111 <- F1111 %>% 
   gather(key = "measure_X", value = "F", 1:length(F1111))
 F1111$measure_X <- str_replace(F1111$measure_X,"V","")
 
 
-VX1111 <- read.csv('Data/VX-1-1-2-1.csv',header = FALSE)
+VX1111 <- read.csv('Data/VX-1-2-1-1.csv',header = FALSE)
 VX1111 <- VX1111 %>% 
   gather(key = "measure_X", value = "VX", 1:length(VX1111))
 VX1111$measure_X <- str_replace(VX1111$measure_X,"V","")
 
 
-VY1111 <- read.csv('Data/VY-1-1-2-1.csv',header = FALSE)
+VY1111 <- read.csv('Data/VY-1-2-1-1.csv',header = FALSE)
 VY1111 <- VY1111 %>% 
   gather(key = "measure_X", value = "VY", 1:length(VY1111))
 VY1111$measure_X <- str_replace(VY1111$measure_X,"V","")

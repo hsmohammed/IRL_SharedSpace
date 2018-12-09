@@ -1,0 +1,28 @@
+# Data Extraction
+source("DataExtraction112x_Rushdi.R")
+source("DataExtraction121x_Rushdi.R")
+source("DataExtraction122x_Rushdi.R")
+source("DataExtraction142x_Rushdi.R")
+source("DataExtraction152x_Rushdi.R")
+source("DataExtraction161x_Rushdi.R")
+source("DataExtraction162x_Rushdi.R")
+source("DataExtraction171x_Rushdi.R")
+source("DataExtraction172x_Rushdi.R")
+source("DataExtraction182x_Rushdi.R")
+source("DataExtraction191x_Rushdi.R")
+source("DataExtraction192x_Rushdi.R")
+
+# Speed smoothing
+
+source("SmoothSpeed_112x.R")
+source("SmoothSpeed_121x.R")
+source("SmoothSpeed_122x.R")
+source("SmoothSpeed_142x.R")
+source("SmoothSpeed_152x.R")
+source("SmoothSpeed_161x.R")
+source("SmoothSpeed_162x.R")
+source("SmoothSpeed_171x.R")
+source("SmoothSpeed_172x.R")
+source("SmoothSpeed_182x.R")
+source("SmoothSpeed_191x.R")
+source("SmoothSpeed_192x.R")

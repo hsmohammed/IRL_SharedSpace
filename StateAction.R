@@ -66,6 +66,16 @@ Traj_Obj_111x_clipped3 <- Traj_Obj_111x_clipped3 %>%
   mutate(yawGrid = discretize(yawAngle_axis2,method = "fixed" ,breaks = breaksYaw,labels = seq(1:(length(breaksYaw)-1)))) %>% 
   mutate(accGrid = discretize(acc_SGF,method = "fixed" ,breaks = breaksAcc,labels = seq(1:(length(breaksAcc)-1))))
 
+
+Traj_FBF <- Traj_Obj_111x_clipped3 %>% 
+  dplyr::group_by(Obj_ID) %>% 
+  dplyr::arrange(F, type)
+
+Traj_FBF_count <- Traj_FBF %>% 
+  group_by(F) %>% 
+  summarise(count = n())
+
+
 p1 <- tables_XY %>% 
   ggplot(aes(X,Y, col = code, group = code))+
   annotation_custom(rasterGrob(ima_212, width = unit(1,"npc"), 

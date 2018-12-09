@@ -18,7 +18,7 @@ p1 <- tables_XY %>%
 ggsave(filename = "Map/tables_XY-172x.jpg",p1)
 
 #calculate rotation angle
-RotationAngle <- atan(abs(tables_XY$X[1]-tables_XY$X[2])/abs(tables_XY$X[1]-tables_XY$X[2]))
+RotationAngle <- atan(abs(tables_XY_112x$X[1]-tables_XY_112x$X[2])/abs(tables_XY_112x$Y[1]-tables_XY_112x$Y[2]))
 
 Traj_Obj_172x_clipped3 <- Traj_Obj_172x_clipped3 %>% 
   mutate(X_axis2_SGF = X_SGF * cos(RotationAngle) + Y_SGF * sin(RotationAngle)) %>% 

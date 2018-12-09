@@ -1,0 +1,3 @@
+- Acceleration values filteration
+- Two bicycle trajectories need to be truncated at specific parts
+- Maybe we can think about filtering the first n and/or the last m frames of each trajectory

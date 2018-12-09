@@ -2,9 +2,9 @@ grid = 2; %meter squared
 
 CPmod = CP/grid;
 
-pix = 14.2736;
+pix = 11.7541;
 
-world_image = 'D:\IRL_SharedSpace\IRL_SharedSpace\Map\RB-1-1-world.jpg';
+world_image = 'D:\IRL_SharedSpace\IRL_SharedSpace\Map\RB-1-6--world.jpg';
 wld = imread(world_image);
 %imshow(wld);
 

@@ -54,15 +54,15 @@ Traj_Obj_112x_clipped2 <- Traj_Obj_112x_clipped2 %>%
 
 
 
-# Traj_Obj_111x_clipped2 <- Traj_Obj_111x_clipped2 %>% 
+# Traj_Obj_112x_clipped2 <- Traj_Obj_112x_clipped2 %>% 
 #   group_by(comp) %>% 
 #   group_by(Obj) %>% 
 
-# Traj_Obj_111x_clipped2 <- Traj_Obj_111x_clipped2[c(FALSE,Traj_Obj_111x_clipped2$Obj[-1]==Traj_Obj_111x_clipped2$Obj[-(nrow(Traj_Obj_111x_clipped2)-1)]),]
+# Traj_Obj_112x_clipped2 <- Traj_Obj_112x_clipped2[c(FALSE,Traj_Obj_112x_clipped2$Obj[-1]==Traj_Obj_112x_clipped2$Obj[-(nrow(Traj_Obj_112x_clipped2)-1)]),]
 
 
 
-# Traj_Obj_111x_clipped2 <- Traj_Obj_111x_clipped2 %>% 
+# Traj_Obj_112x_clipped2 <- Traj_Obj_112x_clipped2 %>% 
 #   group_by(comp) %>% 
 #   group_by(Obj) %>% 
 #   mutate(speed_3frame_mps =rollmean(speed_inst, 3, na.pad = TRUE, align = "right")) %>% 
@@ -87,15 +87,15 @@ Traj_Obj_112x_clipped2 <- Traj_Obj_112x_clipped2 %>%
 #   mutate(yawRate_13frame_mps =rollmean(yawRate, 13, na.pad = TRUE, align = "right")) %>%
 #   mutate(yawRate_15frame_mps =rollmean(yawRate, 15, na.pad = TRUE, align = "right")) 
 # 
-# Traj_Obj_111x_clipped2 <- Traj_Obj_111x_clipped2[complete.cases(Traj_Obj_111x_clipped2), ]
+# Traj_Obj_112x_clipped2 <- Traj_Obj_112x_clipped2[complete.cases(Traj_Obj_112x_clipped2), ]
 # 
-# Traj_Obj_111x_clipped2 <- Traj_Obj_111x_clipped2 %>% 
+# Traj_Obj_112x_clipped2 <- Traj_Obj_112x_clipped2 %>% 
 #   group_by(comp) %>% 
 #   group_by(Obj) %>% 
 #   mutate(acc_inst = (lag(speed_15frame_mps, default = NA )-speed_15frame_mps)*15) %>% 
 #   mutate(acc_15frame_mps2 = rollmean(acc_inst, 7, na.pad = TRUE, align = "right"))
 # 
-# Traj_Obj_111x_clipped2 <- Traj_Obj_111x_clipped2[c(FALSE,Traj_Obj_111x_clipped2$Obj[-1]==Traj_Obj_111x_clipped2$Obj[-(nrow(Traj_Obj_111x_clipped2)-1)]),]
+# Traj_Obj_112x_clipped2 <- Traj_Obj_112x_clipped2[c(FALSE,Traj_Obj_112x_clipped2$Obj[-1]==Traj_Obj_112x_clipped2$Obj[-(nrow(Traj_Obj_112x_clipped2)-1)]),]
 # 
-# Traj_Obj_111x_clipped2 <- Traj_Obj_111x_clipped2[complete.cases(Traj_Obj_111x_clipped2), ]
-# Traj_Obj_111x_clipped2 <- Traj_Obj_111x_clipped2[c(FALSE,Traj_Obj_111x_clipped2$Obj[-1]==Traj_Obj_111x_clipped2$Obj[-(nrow(Traj_Obj_111x_clipped2)-1)]),]
+# Traj_Obj_112x_clipped2 <- Traj_Obj_112x_clipped2[complete.cases(Traj_Obj_112x_clipped2), ]
+# Traj_Obj_112x_clipped2 <- Traj_Obj_112x_clipped2[c(FALSE,Traj_Obj_112x_clipped2$Obj[-1]==Traj_Obj_112x_clipped2$Obj[-(nrow(Traj_Obj_112x_clipped2)-1)]),]

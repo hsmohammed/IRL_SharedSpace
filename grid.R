@@ -2,13 +2,13 @@ Traj_Obj_clipped3_merged <- full_join(Traj_Obj_112x_clipped3,Traj_Obj_121x_clipp
 Traj_Obj_clipped3_merged <- full_join(Traj_Obj_clipped3_merged,Traj_Obj_122x_clipped3)
 Traj_Obj_clipped3_merged <- full_join(Traj_Obj_clipped3_merged,Traj_Obj_142x_clipped3)
 Traj_Obj_clipped3_merged <- full_join(Traj_Obj_clipped3_merged,Traj_Obj_152x_clipped3)
-Traj_Obj_clipped3_merged <- full_join(Traj_Obj_clipped3_merged,Traj_Obj_161x_clipped3)
-Traj_Obj_clipped3_merged <- full_join(Traj_Obj_clipped3_merged,Traj_Obj_162x_clipped3)
-Traj_Obj_clipped3_merged <- full_join(Traj_Obj_clipped3_merged,Traj_Obj_171x_clipped3)
-Traj_Obj_clipped3_merged <- full_join(Traj_Obj_clipped3_merged,Traj_Obj_172x_clipped3)
-Traj_Obj_clipped3_merged <- full_join(Traj_Obj_clipped3_merged,Traj_Obj_182x_clipped3)
-Traj_Obj_clipped3_merged <- full_join(Traj_Obj_clipped3_merged,Traj_Obj_191x_clipped3)
-Traj_Obj_clipped3_merged <- full_join(Traj_Obj_clipped3_merged,Traj_Obj_192x_clipped3)
+# Traj_Obj_clipped3_merged <- full_join(Traj_Obj_clipped3_merged,Traj_Obj_161x_clipped3)
+# Traj_Obj_clipped3_merged <- full_join(Traj_Obj_clipped3_merged,Traj_Obj_162x_clipped3)
+# Traj_Obj_clipped3_merged <- full_join(Traj_Obj_clipped3_merged,Traj_Obj_171x_clipped3)
+# Traj_Obj_clipped3_merged <- full_join(Traj_Obj_clipped3_merged,Traj_Obj_172x_clipped3)
+# Traj_Obj_clipped3_merged <- full_join(Traj_Obj_clipped3_merged,Traj_Obj_182x_clipped3)
+# Traj_Obj_clipped3_merged <- full_join(Traj_Obj_clipped3_merged,Traj_Obj_191x_clipped3)
+# Traj_Obj_clipped3_merged <- full_join(Traj_Obj_clipped3_merged,Traj_Obj_192x_clipped3)
 
 
 
@@ -36,8 +36,6 @@ breaksAcc <- seq(from = minAcc, to = maxAcc, length.out = 5)
 
 # Tables
 
-
-
 tables_XY_112x <- read.csv("Map/tables_XY-112x.csv")
 tables_XY_121x <- read.csv("Map/tables_XY-121x.csv")
 tables_XY_122x <- read.csv("Map/tables_XY-122x.csv")
@@ -51,16 +49,84 @@ tables_XY_182x <- read.csv("Map/tables_XY-182x.csv")
 tables_XY_191x <- read.csv("Map/tables_XY-191x.csv")
 tables_XY_192x <- read.csv("Map/tables_XY-192x.csv")
 
-RotationAngle_112x <- atan(abs(tables_XY_112x$X[1]-tables_XY_112x$X[2])/abs(tables_XY_112x$Y[1]-tables_XY_112x$Y[2]))
-RotationAngle_121x <- atan(abs(tables_XY_121x$X[1]-tables_XY_121x$X[2])/abs(tables_XY_121x$Y[1]-tables_XY_121x$Y[2]))
-RotationAngle_122x <- atan(abs(tables_XY_122x$X[1]-tables_XY_122x$X[2])/abs(tables_XY_122x$Y[1]-tables_XY_122x$Y[2]))
-RotationAngle_142x <- atan(abs(tables_XY_142x$X[1]-tables_XY_142x$X[2])/abs(tables_XY_142x$Y[1]-tables_XY_142x$Y[2]))
-RotationAngle_152x <- atan(abs(tables_XY_152x$X[1]-tables_XY_152x$X[2])/abs(tables_XY_152x$Y[1]-tables_XY_152x$Y[2]))
-RotationAngle_161x <- atan(abs(tables_XY_161x$X[1]-tables_XY_161x$X[2])/abs(tables_XY_161x$Y[1]-tables_XY_161x$Y[2]))
-RotationAngle_162x <- atan(abs(tables_XY_162x$X[1]-tables_XY_162x$X[2])/abs(tables_XY_162x$Y[1]-tables_XY_162x$Y[2]))
-RotationAngle_171x <- atan(abs(tables_XY_171x$X[1]-tables_XY_171x$X[2])/abs(tables_XY_171x$Y[1]-tables_XY_171x$Y[2]))
-RotationAngle_172x <- atan(abs(tables_XY_172x$X[1]-tables_XY_172x$X[2])/abs(tables_XY_172x$Y[1]-tables_XY_172x$Y[2]))
-RotationAngle_182x <- atan(abs(tables_XY_182x$X[1]-tables_XY_182x$X[2])/abs(tables_XY_182x$Y[1]-tables_XY_182x$Y[2]))
-RotationAngle_191x <- atan(abs(tables_XY_191x$X[1]-tables_XY_191x$X[2])/abs(tables_XY_191x$Y[1]-tables_XY_191x$Y[2]))
-RotationAngle_192x <- atan(abs(tables_XY_192x$X[1]-tables_XY_192x$X[2])/abs(tables_XY_192x$Y[1]-tables_XY_192x$Y[2]))
+RotationAngle <- atan(abs(tables_XY_112x$X[1]-tables_XY_112x$X[2])/abs(tables_XY_112x$Y[1]-tables_XY_112x$Y[2]))
 
+tables_XY_112x <- tables_XY_112x %>% 
+  dplyr::mutate(X_axis2 = X * cos(RotationAngle) + Y * sin(RotationAngle)) %>% 
+  dplyr::mutate(Y_axis2 = X * -1 * sin(RotationAngle) + Y * cos(RotationAngle)) %>% 
+  mutate(xgrid = discretize(X_axis2,method = "fixed" ,breaks = breaksX,labels = seq(1:(length(breaksX)-1)))) %>% 
+  mutate(ygrid = discretize(Y_axis2,method = "fixed" ,breaks = breaksY,labels = seq(1:(length(breaksY)-1))))
+
+tables_XY_121x <- tables_XY_121x %>% 
+  dplyr::mutate(X_axis2 = X * cos(RotationAngle) + Y * sin(RotationAngle)) %>% 
+  dplyr::mutate(Y_axis2 = X * -1 * sin(RotationAngle) + Y * cos(RotationAngle))%>% 
+  mutate(xgrid = discretize(X_axis2,method = "fixed" ,breaks = breaksX,labels = seq(1:(length(breaksX)-1)))) %>% 
+  mutate(ygrid = discretize(Y_axis2,method = "fixed" ,breaks = breaksY,labels = seq(1:(length(breaksY)-1))))
+
+tables_XY_122x <- tables_XY_122x %>% 
+  dplyr::mutate(X_axis2 = X * cos(RotationAngle) + Y * sin(RotationAngle)) %>% 
+  dplyr::mutate(Y_axis2 = X * -1 * sin(RotationAngle) + Y * cos(RotationAngle))%>% 
+  mutate(xgrid = discretize(X_axis2,method = "fixed" ,breaks = breaksX,labels = seq(1:(length(breaksX)-1)))) %>% 
+  mutate(ygrid = discretize(Y_axis2,method = "fixed" ,breaks = breaksY,labels = seq(1:(length(breaksY)-1))))
+
+tables_XY_142x <- tables_XY_142x %>% 
+  dplyr::mutate(X_axis2 = X * cos(RotationAngle) + Y * sin(RotationAngle)) %>% 
+  dplyr::mutate(Y_axis2 = X * -1 * sin(RotationAngle) + Y * cos(RotationAngle))%>% 
+  mutate(xgrid = discretize(X_axis2,method = "fixed" ,breaks = breaksX,labels = seq(1:(length(breaksX)-1)))) %>% 
+  mutate(ygrid = discretize(Y_axis2,method = "fixed" ,breaks = breaksY,labels = seq(1:(length(breaksY)-1))))
+
+tables_XY_152x <- tables_XY_152x %>% 
+  dplyr::mutate(X_axis2 = X * cos(RotationAngle) + Y * sin(RotationAngle)) %>% 
+  dplyr::mutate(Y_axis2 = X * -1 * sin(RotationAngle) + Y * cos(RotationAngle))%>% 
+  mutate(xgrid = discretize(X_axis2,method = "fixed" ,breaks = breaksX,labels = seq(1:(length(breaksX)-1)))) %>% 
+  mutate(ygrid = discretize(Y_axis2,method = "fixed" ,breaks = breaksY,labels = seq(1:(length(breaksY)-1))))
+
+tables_XY_161x <- tables_XY_161x %>% 
+  dplyr::mutate(X_axis2 = X * cos(RotationAngle) + Y * sin(RotationAngle)) %>% 
+  dplyr::mutate(Y_axis2 = X * -1 * sin(RotationAngle) + Y * cos(RotationAngle))%>% 
+  mutate(xgrid = discretize(X_axis2,method = "fixed" ,breaks = breaksX,labels = seq(1:(length(breaksX)-1)))) %>% 
+  mutate(ygrid = discretize(Y_axis2,method = "fixed" ,breaks = breaksY,labels = seq(1:(length(breaksY)-1))))
+
+tables_XY_162x <- tables_XY_162x %>% 
+  dplyr::mutate(X_axis2 = X * cos(RotationAngle) + Y * sin(RotationAngle)) %>% 
+  dplyr::mutate(Y_axis2 = X * -1 * sin(RotationAngle) + Y * cos(RotationAngle))%>% 
+  mutate(xgrid = discretize(X_axis2,method = "fixed" ,breaks = breaksX,labels = seq(1:(length(breaksX)-1)))) %>% 
+  mutate(ygrid = discretize(Y_axis2,method = "fixed" ,breaks = breaksY,labels = seq(1:(length(breaksY)-1))))
+
+tables_XY_171x <- tables_XY_171x %>% 
+  dplyr::mutate(X_axis2 = X * cos(RotationAngle) + Y * sin(RotationAngle)) %>% 
+  dplyr::mutate(Y_axis2 = X * -1 * sin(RotationAngle) + Y * cos(RotationAngle))%>% 
+  mutate(xgrid = discretize(X_axis2,method = "fixed" ,breaks = breaksX,labels = seq(1:(length(breaksX)-1)))) %>% 
+  mutate(ygrid = discretize(Y_axis2,method = "fixed" ,breaks = breaksY,labels = seq(1:(length(breaksY)-1))))
+
+tables_XY_172x <- tables_XY_172x %>% 
+  dplyr::mutate(X_axis2 = X * cos(RotationAngle) + Y * sin(RotationAngle)) %>% 
+  dplyr::mutate(Y_axis2 = X * -1 * sin(RotationAngle) + Y * cos(RotationAngle))%>% 
+  mutate(xgrid = discretize(X_axis2,method = "fixed" ,breaks = breaksX,labels = seq(1:(length(breaksX)-1)))) %>% 
+  mutate(ygrid = discretize(Y_axis2,method = "fixed" ,breaks = breaksY,labels = seq(1:(length(breaksY)-1))))
+
+tables_XY_182x <- tables_XY_182x %>% 
+  dplyr::mutate(X_axis2 = X * cos(RotationAngle) + Y * sin(RotationAngle)) %>% 
+  dplyr::mutate(Y_axis2 = X * -1 * sin(RotationAngle) + Y * cos(RotationAngle))%>% 
+  mutate(xgrid = discretize(X_axis2,method = "fixed" ,breaks = breaksX,labels = seq(1:(length(breaksX)-1)))) %>% 
+  mutate(ygrid = discretize(Y_axis2,method = "fixed" ,breaks = breaksY,labels = seq(1:(length(breaksY)-1))))
+
+tables_XY_191x <- tables_XY_191x %>% 
+  dplyr::mutate(X_axis2 = X * cos(RotationAngle) + Y * sin(RotationAngle)) %>% 
+  dplyr::mutate(Y_axis2 = X * -1 * sin(RotationAngle) + Y * cos(RotationAngle))%>% 
+  mutate(xgrid = discretize(X_axis2,method = "fixed" ,breaks = breaksX,labels = seq(1:(length(breaksX)-1)))) %>% 
+  mutate(ygrid = discretize(Y_axis2,method = "fixed" ,breaks = breaksY,labels = seq(1:(length(breaksY)-1))))
+
+tables_XY_192x <- tables_XY_192x %>% 
+  dplyr::mutate(X_axis2 = X * cos(RotationAngle) + Y * sin(RotationAngle)) %>% 
+  dplyr::mutate(Y_axis2 = X * -1 * sin(RotationAngle) + Y * cos(RotationAngle))%>% 
+  mutate(xgrid = discretize(X_axis2,method = "fixed" ,breaks = breaksX,labels = seq(1:(length(breaksX)-1)))) %>% 
+  mutate(ygrid = discretize(Y_axis2,method = "fixed" ,breaks = breaksY,labels = seq(1:(length(breaksY)-1))))
+
+
+Traj_Obj_112x_clipped3 <- Traj_Obj_112x_clipped3 %>% 
+  mutate(xgrid = discretize(X_axis2_SGF,method = "fixed" ,breaks = breaksX,labels = seq(1:(length(breaksX)-1)))) %>% 
+  mutate(ygrid = discretize(Y_axis2_SGF,method = "fixed" ,breaks = breaksY,labels = seq(1:(length(breaksY)-1)))) %>% 
+  mutate(speedGrid = discretize(speed_SGF,method = "fixed" ,breaks = breaksSpeed,labels = seq(1:(length(breaksSpeed)-1)))) %>% 
+  mutate(yawGrid = discretize(yawAngle_axis2,method = "fixed" ,breaks = breaksYaw,labels = seq(1:(length(breaksYaw)-1)))) %>% 
+  mutate(accGrid = discretize(acc_SGF,method = "fixed" ,breaks = breaksAcc,labels = seq(1:(length(breaksAcc)-1))))

@@ -25,7 +25,7 @@ Traj_Obj_191x_clipped3 <- Traj_Obj_191x_clipped3 %>%
   mutate(X_axis2_SGF = X_SGF * cos(RotationAngle) + Y_SGF * sin(RotationAngle)) %>% 
   mutate(Y_axis2_SGF = X_SGF * -1* sin(RotationAngle) + Y_SGF * cos(RotationAngle)) %>% 
   dplyr::mutate(deltaX = X_axis2_SGF - lag(X_axis2_SGF, default = NA )) %>% 
-  dplyr::mutate(deltaY = X_axis2_SGF - lag(X_axis2_SGF, default = NA )) %>% 
+  dplyr::mutate(deltaY = Y_axis2_SGF - lag(Y_axis2_SGF, default = NA )) %>% 
   dplyr::mutate(quarter = ifelse(deltaX > 0 & deltaY > 0, 1, 
                                  ifelse(deltaX > 0 & deltaY < 0, 2, 
                                         ifelse(deltaX <0 & deltaY <0, 3,

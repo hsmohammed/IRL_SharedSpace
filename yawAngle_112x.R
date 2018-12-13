@@ -3,7 +3,7 @@ Traj_Obj_112x_clipped3 <- Traj_Obj_112x_clipped2
 
 Traj_Obj_112x_clipped3$X_SGF
 
-tables_XY <- read.csv("Map/tables_XY-112x.csv")
+tables_XY_112x <- read.csv("Map/tables_XY-112x.csv")
 
 # plot tables on map
 ima_212 <- jpeg::readJPEG("Map/RB-1-1-world.jpg")

@@ -84,3 +84,29 @@ Traj_Obj_112x_bicyclesAndPed <- Traj_Obj_112x_bicyclesAndPed %>%
   dplyr::group_by(F) %>% 
   dplyr::mutate(absoluteDist = sqrt((first(Y_axis2_SGF) - Y_axis2_SGF)^2 + (first(X_axis2_SGF) - X_axis2_SGF)^2)) %>% 
   dplyr::mutate(YawDiff = first(yawAngle_axis2) - yawAngle_axis2)
+
+Traj_Obj_112x_bicyclesAndPed <- Traj_Obj_112x_bicyclesAndPed %>% arrange(F, absoluteDist)
+Traj_Obj_112x_bicyclesAndPed <- Traj_Obj_112x_bicyclesAndPed %>% 
+  dplyr::mutate(dist1 = nth(absoluteDist, 2),
+                dist2 = nth(absoluteDist, 3),
+                dist3 = nth(absoluteDist, 4),
+                dist4 = nth(absoluteDist, 5))
+
+Traj_Obj_112x_bicyclesAndPed <- Traj_Obj_112x_bicyclesAndPed %>% 
+  dplyr::mutate(dist1_mod = ifelse(is.na(dist1), 9999, dist1),
+                dist2_mod = ifelse(is.na(dist2), 9999, dist2),
+                dist3_mod = ifelse(is.na(dist3), 9999, dist3),
+                dist4_mod = ifelse(is.na(dist4), 9999, dist4))
+
+Traj_Obj_112x_bicyclesAndPed <- Traj_Obj_112x_bicyclesAndPed %>% 
+  dplyr::mutate(YawDiff1 = nth(YawDiff, 2),
+                YawDiff2 = nth(YawDiff, 3),
+                YawDiff3 = nth(YawDiff, 4),
+                YawDiff4 = nth(YawDiff, 5))
+
+
+Traj_Obj_112x_bicyclesAndPed <- Traj_Obj_112x_bicyclesAndPed %>% 
+  dplyr::mutate(YawDiff1_mod = ifelse(is.na(YawDiff1), 0, YawDiff1),
+                YawDiff2_mod = ifelse(is.na(YawDiff2), 0, YawDiff2),
+                YawDiff3_mod = ifelse(is.na(YawDiff3), 0, YawDiff3),
+                YawDiff4_mod = ifelse(is.na(YawDiff4), 0, YawDiff4))

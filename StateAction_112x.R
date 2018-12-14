@@ -44,7 +44,66 @@
 # BrooklynData %>% 
 #   ggplot(aes(x = acc_SGF))+
 #   geom_histogram()
-Traj_Obj_112x_bicycles <- Traj_Obj_112x_bicyclesAndPed %>% dplyr::filter(type == "b")
+
+
+
+##Add detailed component ID to the data
+
+Traj_Obj_112x_bicyclesAndPed_1 <- Traj_Obj_112x_bicyclesAndPed %>%
+  mutate(Obj_ID = paste("112x", Obj_ID,sep = "_"))
+
+Traj_Obj_121x_bicyclesAndPed_1 <- Traj_Obj_121x_bicyclesAndPed %>%
+  mutate(Obj_ID = paste("121x", Obj_ID,sep = "_"))
+
+Traj_Obj_122x_bicyclesAndPed_1 <- Traj_Obj_122x_bicyclesAndPed %>%
+  mutate(Obj_ID = paste("122x", Obj_ID,sep = "_"))
+
+Traj_Obj_142x_bicyclesAndPed_1 <- Traj_Obj_142x_bicyclesAndPed %>%
+  mutate(Obj_ID = paste("142x", Obj_ID,sep = "_"))
+
+Traj_Obj_152x_bicyclesAndPed_1 <- Traj_Obj_152x_bicyclesAndPed %>%
+  mutate(Obj_ID = paste("152x", Obj_ID,sep = "_"))
+
+Traj_Obj_161x_bicyclesAndPed_1 <- Traj_Obj_161x_bicyclesAndPed %>%
+  mutate(Obj_ID = paste("161x", Obj_ID,sep = "_"))
+
+Traj_Obj_162x_bicyclesAndPed_1 <- Traj_Obj_162x_bicyclesAndPed %>%
+  mutate(Obj_ID = paste("162x", Obj_ID,sep = "_"))
+
+Traj_Obj_171x_bicyclesAndPed_1 <- Traj_Obj_171x_bicyclesAndPed %>%
+  mutate(Obj_ID = paste("171x", Obj_ID,sep = "_"))
+
+Traj_Obj_172x_bicyclesAndPed_1 <- Traj_Obj_172x_bicyclesAndPed %>%
+  mutate(Obj_ID = paste("172x", Obj_ID,sep = "_"))
+
+Traj_Obj_182x_bicyclesAndPed_1 <- Traj_Obj_182x_bicyclesAndPed %>%
+  mutate(Obj_ID = paste("182x", Obj_ID,sep = "_"))
+
+Traj_Obj_191x_bicyclesAndPed_1 <- Traj_Obj_191x_bicyclesAndPed %>%
+  mutate(Obj_ID = paste("191x", Obj_ID,sep = "_"))
+
+Traj_Obj_192x_bicyclesAndPed_1 <- Traj_Obj_192x_bicyclesAndPed %>%
+  mutate(Obj_ID = paste("192x", Obj_ID,sep = "_"))
+
+
+# Join full data
+
+Traj_Obj_all_bicyclesAndPed <- full_join(Traj_Obj_112x_bicyclesAndPed_1,Traj_Obj_121x_bicyclesAndPed_1)
+Traj_Obj_all_bicyclesAndPed <- full_join(Traj_Obj_all_bicyclesAndPed,Traj_Obj_122x_bicyclesAndPed_1)
+Traj_Obj_all_bicyclesAndPed <- full_join(Traj_Obj_all_bicyclesAndPed,Traj_Obj_142x_bicyclesAndPed_1)
+Traj_Obj_all_bicyclesAndPed <- full_join(Traj_Obj_all_bicyclesAndPed,Traj_Obj_152x_bicyclesAndPed_1)
+Traj_Obj_all_bicyclesAndPed <- full_join(Traj_Obj_all_bicyclesAndPed,Traj_Obj_161x_bicyclesAndPed_1)
+Traj_Obj_all_bicyclesAndPed <- full_join(Traj_Obj_all_bicyclesAndPed,Traj_Obj_162x_bicyclesAndPed_1)
+Traj_Obj_all_bicyclesAndPed <- full_join(Traj_Obj_all_bicyclesAndPed,Traj_Obj_171x_bicyclesAndPed_1)
+Traj_Obj_all_bicyclesAndPed <- full_join(Traj_Obj_all_bicyclesAndPed,Traj_Obj_172x_bicyclesAndPed_1)
+Traj_Obj_all_bicyclesAndPed <- full_join(Traj_Obj_all_bicyclesAndPed,Traj_Obj_182x_bicyclesAndPed_1)
+Traj_Obj_all_bicyclesAndPed <- full_join(Traj_Obj_all_bicyclesAndPed,Traj_Obj_191x_bicyclesAndPed_1)
+Traj_Obj_all_bicyclesAndPed <- full_join(Traj_Obj_all_bicyclesAndPed,Traj_Obj_191x_bicyclesAndPed_1)
+
+
+
+
+Traj_Obj_112x_bicycles <- Traj_Obj_all_bicyclesAndPed %>% dplyr::filter(type == "b")
 
 bicycles_112x_variables <- Traj_Obj_112x_bicycles %>% 
   dplyr::select(F, Obj_ID, dist1_mod, dist2_mod, YawDiff1_mod, YawDiff2_mod, speed_SGF, yawAngle_axis2, acc_SGF)

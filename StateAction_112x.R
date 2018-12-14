@@ -44,130 +44,148 @@
 # BrooklynData %>% 
 #   ggplot(aes(x = acc_SGF))+
 #   geom_histogram()
+Traj_Obj_112x_bicycles <- Traj_Obj_112x_bicyclesAndPed %>% dplyr::filter(type == "b")
 
-states_Brooklyn <- BrooklynData %>% 
-  select(Obj_ID,F, speed_SGF, Long_distance, Lateral_distance, Speed_diff, pathDeviation)
+bicycles_112x_variables <- Traj_Obj_112x_bicycles %>% 
+  dplyr::select(F, Obj_ID, dist1_mod, dist2_mod, YawDiff1_mod, YawDiff2_mod, speed_SGF, yawAngle_axis2, acc_SGF)
+
+states_112x <- bicycles_112x_variables %>% 
+  select(Obj_ID,F, dist1_mod, dist2_mod, YawDiff1_mod, YawDiff2_mod, speed_SGF)
 
 
-actions_Brooklyn <- BrooklynData %>% 
-  select(Obj_ID,F, acc_SGF, yawAngle_SGF)
+actions_112x <- bicycles_112x_variables %>% 
+  select(Obj_ID,F, yawAngle_axis2, acc_SGF)
 
 library(arules)
 
 
 
-a <- discretize(states_Brooklyn$speed_SGF, method = "frequency", breaks = 5)
+a <- discretize(states_112x$dist1_mod, method = "interval", breaks = 5)
+write.csv(levels(a),"dist1_Ranges.csv")
+levels(a) <- c(1:5)
+
+
+states_112x <- states_112x %>% ungroup() %>% 
+  dplyr::mutate(dist1_disc = a)
+
+
+
+a <- discretize(states_112x$dist2_mod, method = "interval", breaks = 5)
+write.csv(levels(a),"dist2_Ranges.csv")
+levels(a) <- c(1:5)
+
+
+states_112x <- states_112x %>% ungroup() %>% 
+  dplyr::mutate(dist2_disc = a)
+
+
+
+
+
+a <- discretize(states_112x$YawDiff1_mod, method = "interval", breaks = 5)
+write.csv(levels(a),"YawDiff1_Ranges.csv")
+levels(a) <- c(1:5)
+
+
+states_112x <- states_112x %>% ungroup() %>% 
+  dplyr::mutate(YawDiff1_disc = a)
+
+
+
+a <- discretize(states_112x$YawDiff2_mod, method = "interval", breaks = 5)
+write.csv(levels(a),"YawDiff2_Ranges.csv")
+levels(a) <- c(1:5)
+
+
+states_112x <- states_112x %>% ungroup() %>% 
+  dplyr::mutate(YawDiff2_disc = a)
+
+
+a <- discretize(states_112x$speed_SGF, method = "interval", breaks = 5)
 write.csv(levels(a),"speed_SGF_Ranges.csv")
 levels(a) <- c(1:5)
 
 
-states_Brooklyn <- states_Brooklyn %>% ungroup() %>% 
+states_112x <- states_112x %>% ungroup() %>% 
   dplyr::mutate(speed_SGF_disc = a)
 
 
+# Actions discretization
 
-
-a <- discretize(states_Brooklyn$Long_distance, method = "frequency", breaks = 5)
-
-write.csv(levels(a),"Long_distance_Ranges.csv")
-
+a <- discretize(actions_112x$yawAngle_axis2, method = "interval", breaks = 5)
+write.csv(levels(a),"yawAngle_axis2_Ranges.csv")
 levels(a) <- c(1:5)
 
-states_Brooklyn <- states_Brooklyn %>% ungroup() %>% 
-  dplyr::mutate(Long_distance_disc = a)
+
+actions_112x <- actions_112x %>% ungroup() %>% 
+  dplyr::mutate(yawAngle_axis2_disc = a)
 
 
-a <- discretize(states_Brooklyn$Lateral_distance, method = "frequency", breaks = 5)
-
-write.csv(levels(a),"Lateral_distance_Ranges.csv")
-
-levels(a) <- c(1:5)
-
-states_Brooklyn <- states_Brooklyn %>% ungroup() %>% 
-  dplyr::mutate(Lateral_distance_disc = a)
-
-
-a <- discretize(states_Brooklyn$Speed_diff, method = "frequency", breaks = 5)
-
-write.csv(levels(a),"speed_difference_Ranges.csv")
-
-levels(a) <- c(1:5)
-
-states_Brooklyn <- states_Brooklyn %>% ungroup() %>% 
-  dplyr::mutate(Speed_diff_disc = a)
-
-
-a <- discretize(states_Brooklyn$pathDeviation, method = "frequency", breaks = 5)
-
-write.csv(levels(a),"pathDeviation_Ranges.csv")
-
-levels(a) <- c(1:5)
-
-states_Brooklyn <- states_Brooklyn %>% ungroup() %>% 
-  dplyr::mutate(pathDeviation_disc = a)
-
-
-a <- discretize(actions_Brooklyn$acc_SGF, method = "frequency", breaks = 5)
-
+a <- discretize(actions_112x$acc_SGF, method = "interval", breaks = 5)
 write.csv(levels(a),"acc_SGF_Ranges.csv")
-
 levels(a) <- c(1:5)
 
-actions_Brooklyn <- actions_Brooklyn %>% ungroup() %>% 
+
+actions_112x <- actions_112x %>% ungroup() %>% 
   dplyr::mutate(acc_SGF_disc = a)
 
 
 
-a <- discretize(actions_Brooklyn$yawAngle_SGF, method = "frequency", breaks = 5)
-
-write.csv(levels(a),"yawAngle_SGF_Ranges.csv")
-
-levels(a) <- c(1:5)
-
-actions_Brooklyn <- actions_Brooklyn %>% ungroup() %>% 
-  dplyr::mutate(yawAngle_SGF_disc = a)
-
-
-states_Brooklyn <- states_Brooklyn %>% 
-  dplyr::arrange(speed_SGF_disc, Long_distance_disc,Lateral_distance_disc, Speed_diff_disc, pathDeviation_disc)
-
-
-
-states_Brooklyn <- states_Brooklyn %>% 
-  dplyr::mutate(state_no = (as.numeric(speed_SGF_disc)-1)*625+(as.numeric(Long_distance_disc)-1)*125+
-                  (as.numeric(Lateral_distance_disc)-1)*25+(as.numeric(Speed_diff_disc)-1)*5+
-                  as.numeric(pathDeviation_disc))
-
-
-
-actions_Brooklyn <- actions_Brooklyn %>% 
-  dplyr::arrange(acc_SGF_disc, yawAngle_SGF_disc)
 
 
 
 
-actions_Brooklyn <- actions_Brooklyn %>% 
+
+
+
+
+
+
+
+
+
+
+states_112x <- states_112x %>% 
+  dplyr::arrange(dist1_disc, dist2_disc, YawDiff1_disc,YawDiff2_disc,speed_SGF_disc)
+
+
+
+states_112x <- states_112x %>% 
+  dplyr::mutate(state_no = (as.numeric(dist1_disc)-1)*625+(as.numeric(dist2_disc)-1)*125+
+                  (as.numeric(YawDiff1_disc)-1)*25+
+                  (as.numeric(YawDiff2_disc)-1)*5+
+                  as.numeric(speed_SGF_disc))
+
+
+
+actions_112x <- actions_112x %>% 
+  dplyr::arrange(acc_SGF_disc, yawAngle_axis2_disc)
+
+
+
+
+actions_112x <- actions_112x %>% 
   dplyr::mutate(action_no = (as.numeric(acc_SGF_disc)-1)*5+
-                  as.numeric(yawAngle_SGF_disc))
+                  as.numeric(yawAngle_axis2_disc))
 
-states_Brooklyn <- states_Brooklyn %>% 
+states_112x <- states_112x %>% 
   arrange(Obj_ID, F)
 
 
-actions_Brooklyn <- actions_Brooklyn %>% 
+actions_112x <- actions_112x %>% 
   arrange(Obj_ID, F)
 
 
-state_action <- data.frame(Obj_ID = states_Brooklyn$Obj_ID, F = states_Brooklyn$F,state_no = states_Brooklyn$state_no, action_no = actions_Brooklyn$action_no)
+state_action_112x <- data.frame(Obj_ID = states_112x$Obj_ID, F = states_112x$F,state_no = states_112x$state_no, action_no = actions_112x$action_no)
 
 
-state_action <- state_action %>% 
+state_action_112x <- state_action_112x %>% 
   group_by(Obj_ID) %>% 
   mutate(state_no_new = lead(state_no,default = NA))
 
-state_action <- state_action[complete.cases(state_action),]
+state_action_112x <- state_action_112x[complete.cases(state_action_112x),]
 
-length(state_action$Obj_ID)
+length(state_action_112x$Obj_ID)
 
 # Transition probabilities
 
@@ -179,58 +197,59 @@ trans_s <- array(rep(0, 244140625), dim = c(3125,25,3125))
 
 
 
-state_action <- state_action %>% 
+state_action_112x <- state_action_112x %>% 
   mutate(state_action = paste(state_no, action_no, sep = '_'))
 
-state_action2 <- state_action %>% 
+state_action_112x_2 <- state_action_112x %>% 
   ungroup() %>% 
   dplyr::select(state_action, state_no_new)
 
-state_action2 <- state_action2 %>% dplyr::arrange(state_action, state_no_new)
+state_action_112x_2 <- state_action_112x_2 %>% dplyr::arrange(state_action, state_no_new)
 
-state_action2 <- state_action2 %>% 
+state_action_112x_2 <- state_action_112x_2 %>% 
   dplyr::group_by(state_action) %>% 
   dplyr::mutate(trans_count = n())
 
-state_action3 <- state_action2 %>% 
+state_action_112x_3 <- state_action_112x_2 %>% 
   dplyr::mutate(state_action_state = paste(state_action, state_no_new, sep = '_'))
 
-state_action3 <- state_action3 %>% 
+state_action_112x_3 <- state_action_112x_3 %>% 
   dplyr::group_by(state_action_state) %>% 
   dplyr::mutate(new_state_count = n())
 
-state_action4 <- unique(state_action3)
+state_action_112x_4 <- unique(state_action_112x_3)
 
-state_action3 <- state_action3 %>% 
+state_action_112x_3 <- state_action_112x_3 %>% 
   dplyr::mutate(trans_prob = new_state_count/trans_count)
 
-state_action <- state_action %>%
+state_action_112x <- state_action_112x %>%
   dplyr::ungroup() %>% 
   dplyr::mutate(state_action = paste(state_no, action_no, sep = '_')) %>% 
   dplyr::arrange(state_action, state_no_new) %>% 
-  dplyr::mutate(trans_prob = state_action3$trans_prob)
+  dplyr::mutate(trans_prob = state_action_112x_3$trans_prob)
 
-state_action6 <- state_action %>% 
+state_action_112x_6 <- state_action_112x %>% 
   dplyr::group_by(state_no) %>% 
   dplyr::arrange(state_no)
 
-state_action6_count <- state_action6 %>% 
+state_action6_count <- state_action_112x_6 %>% 
   dplyr::summarise(count = n())
 
 
 for (i in 1:13405) {
   
-  trans_prob[state_action$state_no[i],state_action$action_no[i],state_action$state_no_new[i]] = state_action$trans_prob[i]
+  trans_prob[state_action_112x$state_no[i],state_action_112x$action_no[i],state_action_112x$state_no_new[i]] = state_action_112x$trans_prob[i]
 }
 
 
 for (i in 1:13405) {
   
-  trans_s[state_action$state_no[i],state_action$action_no[i],state_action$state_no_new[i]] = state_action$state_no_new[i]
+  trans_s[state_action_112x$state_no[i],state_action_112x$action_no[i],state_action_112x$state_no_new[i]] = state_action_112x$state_no_new[i]
 }
 
 filename <- paste(tempfile(), ".mat", sep="")
 
+library("R.matlab")
 writeMat(filename, trans_prob = trans_prob)
 
 

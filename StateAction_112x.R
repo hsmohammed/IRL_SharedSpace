@@ -355,14 +355,14 @@ for (i in 1:3125) {
 # Create example samples file
 
 
-state_action_2mat <- state_action %>% dplyr::group_by(Obj_ID)
+state_action_2mat <- state_action_112x %>% dplyr::group_by(Obj_ID)
 
 state_action_count <- state_action_2mat %>% dplyr::summarise(count = n())
 
-state_mat <- matrix(nrow = 1275,ncol = 288) 
-action_mat <- matrix(nrow = 1275,ncol = 288) 
+state_mat <- matrix(nrow = 55,ncol = 7193) 
+action_mat <- matrix(nrow = 55,ncol = 7193) 
 
-for (i in 1:1275) {
+for (i in 1:55) {
   for (j in 1:state_action_count$count[i]) {
     
     state_mat[i,j] <- state_action_2mat$state_no[state_action_2mat$Obj_ID == state_action_count$Obj_ID[i]][j]
@@ -383,7 +383,7 @@ writeMat("D:/IRL Paper/AnalysisR/IRL/trans_prob.mat", trans_prob = trans_prob)
 
 writeMat("D:/IRL Paper/AnalysisR/IRL/trans_s.mat", trans_s = trans_s)
 
-state_action_test <- state_action %>% dplyr::filter(Obj_ID %in% BrooklynData_count_test$Obj_ID)
+state_action_test <- state_action_112x %>% dplyr::filter(Obj_ID %in% BrooklynData_count_test$Obj_ID)
 
 # AN
 

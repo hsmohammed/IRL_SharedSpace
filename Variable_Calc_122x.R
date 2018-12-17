@@ -58,13 +58,13 @@ Traj_Obj_122x_bicycles_threePerFrame <- Traj_Obj_122x_bicycles_threePerFrame %>%
 
 Traj_Obj_122x_bicycles_threePerFrame <- Traj_Obj_122x_bicycles_threePerFrame[complete.cases(Traj_Obj_122x_bicycles_threePerFrame),]
 
-
-Traj_Obj_122x_bicycles_threePerFrame <- Traj_Obj_122x_bicycles_threePerFrame %>% 
-  dplyr::group_by(F) %>% 
-  dplyr::arrange(F) %>% 
-  dplyr::mutate(d = Y_axis2_SGF - lag(Y_axis2_SGF, default = NA))
-
-Traj_Obj_122x_bicycles_threePerFrame <- Traj_Obj_122x_bicycles_threePerFrame[complete.cases(Traj_Obj_122x_bicycles_threePerFrame),]
+# 
+# Traj_Obj_122x_bicycles_threePerFrame <- Traj_Obj_122x_bicycles_threePerFrame %>% 
+#   dplyr::group_by(F) %>% 
+#   dplyr::arrange(F) %>% 
+#   dplyr::mutate(d = Y_axis2_SGF - lag(Y_axis2_SGF, default = NA))
+# 
+# Traj_Obj_122x_bicycles_threePerFrame <- Traj_Obj_122x_bicycles_threePerFrame[complete.cases(Traj_Obj_122x_bicycles_threePerFrame),]
 
 Traj_Obj_122x_bicyclesOnly <- full_join(Traj_Obj_122x_bicycles_onePerFrame, Traj_Obj_122x_bicycles_twoPerFrame)
 Traj_Obj_122x_bicyclesOnly <- full_join(Traj_Obj_122x_bicyclesOnly, Traj_Obj_122x_bicycles_threePerFrame)

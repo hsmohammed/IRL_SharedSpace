@@ -89,16 +89,16 @@ Traj_Obj_192x_bicyclesAndPed_1 <- Traj_Obj_192x_bicyclesAndPed %>%
 # Join full data
 
 Traj_Obj_all_bicyclesAndPed <- full_join(Traj_Obj_112x_bicyclesAndPed_1,Traj_Obj_121x_bicyclesAndPed_1)
-#Traj_Obj_all_bicyclesAndPed <- full_join(Traj_Obj_all_bicyclesAndPed,Traj_Obj_122x_bicyclesAndPed_1)
+Traj_Obj_all_bicyclesAndPed <- full_join(Traj_Obj_all_bicyclesAndPed,Traj_Obj_122x_bicyclesAndPed_1)
 Traj_Obj_all_bicyclesAndPed <- full_join(Traj_Obj_all_bicyclesAndPed,Traj_Obj_142x_bicyclesAndPed_1)
 Traj_Obj_all_bicyclesAndPed <- full_join(Traj_Obj_all_bicyclesAndPed,Traj_Obj_152x_bicyclesAndPed_1)
 Traj_Obj_all_bicyclesAndPed <- full_join(Traj_Obj_all_bicyclesAndPed,Traj_Obj_161x_bicyclesAndPed_1)
 Traj_Obj_all_bicyclesAndPed <- full_join(Traj_Obj_all_bicyclesAndPed,Traj_Obj_162x_bicyclesAndPed_1)
-#Traj_Obj_all_bicyclesAndPed <- full_join(Traj_Obj_all_bicyclesAndPed,Traj_Obj_171x_bicyclesAndPed_1)
-#Traj_Obj_all_bicyclesAndPed <- full_join(Traj_Obj_all_bicyclesAndPed,Traj_Obj_172x_bicyclesAndPed_1)
-#Traj_Obj_all_bicyclesAndPed <- full_join(Traj_Obj_all_bicyclesAndPed,Traj_Obj_182x_bicyclesAndPed_1)
-#Traj_Obj_all_bicyclesAndPed <- full_join(Traj_Obj_all_bicyclesAndPed,Traj_Obj_191x_bicyclesAndPed_1)
-#Traj_Obj_all_bicyclesAndPed <- full_join(Traj_Obj_all_bicyclesAndPed,Traj_Obj_191x_bicyclesAndPed_1)
+Traj_Obj_all_bicyclesAndPed <- full_join(Traj_Obj_all_bicyclesAndPed,Traj_Obj_171x_bicyclesAndPed_1)
+Traj_Obj_all_bicyclesAndPed <- full_join(Traj_Obj_all_bicyclesAndPed,Traj_Obj_172x_bicyclesAndPed_1)
+Traj_Obj_all_bicyclesAndPed <- full_join(Traj_Obj_all_bicyclesAndPed,Traj_Obj_182x_bicyclesAndPed_1)
+Traj_Obj_all_bicyclesAndPed <- full_join(Traj_Obj_all_bicyclesAndPed,Traj_Obj_191x_bicyclesAndPed_1)
+Traj_Obj_all_bicyclesAndPed <- full_join(Traj_Obj_all_bicyclesAndPed,Traj_Obj_191x_bicyclesAndPed_1)
 
 
 
@@ -355,14 +355,17 @@ for (i in 1:3125) {
 # Create example samples file
 
 
-state_action_2mat <- state_action %>% dplyr::group_by(Obj_ID)
+state_action_2mat <- state_action_112x %>% dplyr::group_by(Obj_ID)
 
 state_action_count <- state_action_2mat %>% dplyr::summarise(count = n())
 
-state_mat <- matrix(nrow = 1275,ncol = 288) 
-action_mat <- matrix(nrow = 1275,ncol = 288) 
 
-for (i in 1:1275) {
+## 55 is number of trajectories 
+
+state_mat <- matrix(nrow = 19,ncol = 7193)    
+action_mat <- matrix(nrow = 19,ncol = 7193) 
+
+for (i in 1:19) {
   for (j in 1:state_action_count$count[i]) {
     
     state_mat[i,j] <- state_action_2mat$state_no[state_action_2mat$Obj_ID == state_action_count$Obj_ID[i]][j]
@@ -372,18 +375,18 @@ for (i in 1:1275) {
   
 }
 
-writeMat("D:/IRL Paper/AnalysisR/IRL/state_mat.mat", state_mat = state_mat)
+writeMat("C:/Users/Rushdi/Desktop/Rushdi work/IRL modeling of shared sapce/New folder/SampleofTrajectoriesAnalysis/state_mat.mat", state_mat = state_mat)
 
-writeMat("D:/IRL Paper/AnalysisR/IRL/action_mat.mat", action_mat = action_mat)
+writeMat("C:/Users/Rushdi/Desktop/Rushdi work/IRL modeling of shared sapce/New folder/SampleofTrajectoriesAnalysis/action_mat.mat", action_mat = action_mat)
 
-writeMat("D:/IRL Paper/AnalysisR/IRL/features_splittable.mat", features_splittable = features_splittable)
+writeMat("C:/Users/Rushdi/Desktop/Rushdi work/IRL modeling of shared sapce/New folder/SampleofTrajectoriesAnalysis/features_splittable.mat", features_splittable = features_splittable)
 
 
-writeMat("D:/IRL Paper/AnalysisR/IRL/trans_prob.mat", trans_prob = trans_prob)
+writeMat("C:/Users/Rushdi/Desktop/Rushdi work/IRL modeling of shared sapce/New folder/SampleofTrajectoriesAnalysis/trans_prob.mat", trans_prob = trans_prob)
 
-writeMat("D:/IRL Paper/AnalysisR/IRL/trans_s.mat", trans_s = trans_s)
+writeMat("C:/Users/Rushdi/Desktop/Rushdi work/IRL modeling of shared sapce/New folder/SampleofTrajectoriesAnalysis/trans_s.mat", trans_s = trans_s)
 
-state_action_test <- state_action %>% dplyr::filter(Obj_ID %in% BrooklynData_count_test$Obj_ID)
+state_action_test <- state_action_112x %>% dplyr::filter(Obj_ID %in% BrooklynData_count_test$Obj_ID)
 
 # AN
 

@@ -359,6 +359,7 @@ state_action_2mat <- state_action_112x %>% dplyr::group_by(Obj_ID)
 
 state_action_count <- state_action_2mat %>% dplyr::summarise(count = n())
 
+<<<<<<< HEAD
 
 ## 55 is number of trajectories 
 
@@ -366,6 +367,12 @@ state_mat <- matrix(nrow = 19,ncol = 7193)
 action_mat <- matrix(nrow = 19,ncol = 7193) 
 
 for (i in 1:19) {
+=======
+state_mat <- matrix(nrow = 55,ncol = 7193) 
+action_mat <- matrix(nrow = 55,ncol = 7193) 
+
+for (i in 1:55) {
+>>>>>>> 3698ad6d94c87077af6bdb9b551d327951db89cd
   for (j in 1:state_action_count$count[i]) {
     
     state_mat[i,j] <- state_action_2mat$state_no[state_action_2mat$Obj_ID == state_action_count$Obj_ID[i]][j]

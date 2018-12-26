@@ -319,6 +319,7 @@ length(state_action_112x$Obj_ID)
 # Transition probabilities
 
 
+# 3125*25*3125 = 244140625
 
 trans_prob <- array(rep(0, 244140625), dim = c(3125,25,3125))
 
@@ -364,14 +365,15 @@ state_action_112x_6 <- state_action_112x %>%
 state_action6_count <- state_action_112x_6 %>% 
   dplyr::summarise(count = n())
 
+######## here 6615 is the number of rows in state_action_112x ########
 
-for (i in 1:13405) {
+for (i in 1:6615) { 
   
   trans_prob[state_action_112x$state_no[i],state_action_112x$action_no[i],state_action_112x$state_no_new[i]] = state_action_112x$trans_prob[i]
 }
 
 
-for (i in 1:13405) {
+for (i in 1:6615) {
   
   trans_s[state_action_112x$state_no[i],state_action_112x$action_no[i],state_action_112x$state_no_new[i]] = state_action_112x$state_no_new[i]
 }
@@ -395,7 +397,7 @@ tryCatch({
 
 mm<-matrix(list(x = list(a = 5,b = 6), y = 6,z = "tt", r = "aa"), 2, 2)
 
-# feature matrix
+# feature matrix (all possible combination between states and action as @d matrix )
 
 features_splittable <- matrix(rep(0,78125),nrow = 3125,ncol = 25)
 
@@ -424,27 +426,28 @@ for (i in 1:3125) {
 
 # Create example samples file
 
-########## STOP here ##############
+
 
 state_action_2mat <- state_action_112x %>% dplyr::group_by(Obj_ID)
 
 state_action_count <- state_action_2mat %>% dplyr::summarise(count = n())
 
-<<<<<<< HEAD
+
+
 
 ## 55 is number of trajectories 
+## Rushdi: put number of rows as the number of trajectories (i.e. the number of rows in state_action_count), and the number of columns as the max number in state_action_count column 2
 
-state_mat <- matrix(nrow = 19,ncol = 7193)    
-action_mat <- matrix(nrow = 19,ncol = 7193) 
+state_mat <- matrix(nrow = 2,ncol = 20)    
+action_mat <- matrix(nrow = 2,ncol = 20) 
 
-for (i in 1:19) {
-=======
-state_mat <- matrix(nrow = 55,ncol = 7193) 
-action_mat <- matrix(nrow = 55,ncol = 7193) 
+for (i in 1:2) {
+state_mat <- matrix(nrow = 2,ncol = 20) 
+action_mat <- matrix(nrow = 2,ncol = 20) }
 
-for (i in 1:55) {
->>>>>>> 3698ad6d94c87077af6bdb9b551d327951db89cd
-  for (j in 1:state_action_count$count[i]) {
+for (i in 1:2) {
+ 
+  for (j in 1:20) {  #original 1:state_action_count$count[i]) {
     
     state_mat[i,j] <- state_action_2mat$state_no[state_action_2mat$Obj_ID == state_action_count$Obj_ID[i]][j]
     action_mat[i,j] <- state_action_2mat$action_no[state_action_2mat$Obj_ID == state_action_count$Obj_ID[i]][j]
@@ -453,6 +456,27 @@ for (i in 1:55) {
   
 }
 
+
+
+## original code:
+
+# state_mat <- matrix(nrow = 19,ncol = 7193)    
+# action_mat <- matrix(nrow = 19,ncol = 7193) 
+# 
+# for (i in 1:19) {
+#   state_mat <- matrix(nrow = 19,ncol = 7193) 
+#   action_mat <- matrix(nrow = 19,ncol = 7193) }
+# 
+# for (i in 1:19) {
+#   
+#   for (j in 1:state_action_count$count[i]) {
+#     
+#     state_mat[i,j] <- state_action_2mat$state_no[state_action_2mat$Obj_ID == state_action_count$Obj_ID[i]][j]
+#     action_mat[i,j] <- state_action_2mat$action_no[state_action_2mat$Obj_ID == state_action_count$Obj_ID[i]][j]
+#     
+#   }
+#   
+# }
 writeMat("C:/Users/Rushdi/Desktop/Rushdi work/IRL modeling of shared sapce/New folder/SampleofTrajectoriesAnalysis/state_mat.mat", state_mat = state_mat)
 
 writeMat("C:/Users/Rushdi/Desktop/Rushdi work/IRL modeling of shared sapce/New folder/SampleofTrajectoriesAnalysis/action_mat.mat", action_mat = action_mat)
@@ -465,6 +489,10 @@ writeMat("C:/Users/Rushdi/Desktop/Rushdi work/IRL modeling of shared sapce/New f
 writeMat("C:/Users/Rushdi/Desktop/Rushdi work/IRL modeling of shared sapce/New folder/SampleofTrajectoriesAnalysis/trans_s.mat", trans_s = trans_s)
 
 state_action_test <- state_action_112x %>% dplyr::filter(Obj_ID %in% BrooklynData_count_test$Obj_ID)
+
+
+
+########## STOP here ##############
 
 # AN
 

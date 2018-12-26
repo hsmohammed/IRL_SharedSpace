@@ -9,3 +9,33 @@
 - use difference in t+1 and t of yawangle 2
 - shorten the length of trajectory (through new ID)
 
+- why in trans_s where code the trans iusing three values state, action and new state?? should not be only just state and action without the state_new ???
+
+- the error in numbering states and does this effect feature splitting 
+
+- 
+features_splittable <- matrix(rep(0,78125),nrow = 3125,ncol = 25)
+
+
+for (i in 1:3125) {
+  
+  i1 <- (i-1)%%625
+  i2 <- i1%%125
+  i3 <- i2%%25
+  i4 <- i3%%5
+  
+  j1 <- (i-1)%/%625
+  j2 <- i1%/%125
+  j3 <- i2%/%25
+  j4 <- i3%/%5
+  j5 <- i4
+  
+  features_splittable[i, j1+1] = 1
+  features_splittable[i, j2+6] = 1
+  features_splittable[i, j3+11] = 1
+  features_splittable[i, j4+16] = 1
+  features_splittable[i, j5+21] = 1
+  
+  
+}
+should be 

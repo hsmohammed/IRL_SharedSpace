@@ -3,3 +3,9 @@
 - put the world image in the project directory
 - homography
 - add 1 to every trajectory number
+
+
+- smooth yawangle2 (5 frames)
+- use difference in t+1 and t of yawangle 2
+- shorten the length of trajectory (through new ID)
+

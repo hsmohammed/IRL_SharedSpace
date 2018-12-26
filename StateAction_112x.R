@@ -101,12 +101,25 @@ Traj_Obj_all_bicyclesAndPed <- full_join(Traj_Obj_all_bicyclesAndPed,Traj_Obj_19
 Traj_Obj_all_bicyclesAndPed <- full_join(Traj_Obj_all_bicyclesAndPed,Traj_Obj_191x_bicyclesAndPed_1)
 
 
+#Traj_Obj_all_bicyclesAndPed <- Traj_Obj_all_bicyclesAndPed %>% 
+ # ungroup() %>% 
+  #Traj_Obj_all_bicyclesAndPed[with(Traj_Obj_all_bicyclesAndPed, order(-"speed_SGF")), ]
+  #Traj_Obj_all_bicyclesAndPed <- Traj_Obj_all_bicyclesAndPed[order(-"speed_SGF"),]
+
+
+#for (1:length(Traj_Obj_all_bicyclesAndPed)
+
 
 
 Traj_Obj_112x_bicycles <- Traj_Obj_all_bicyclesAndPed %>% dplyr::filter(type == "b")
 
 bicycles_112x_variables <- Traj_Obj_112x_bicycles %>% 
   dplyr::select(F, Obj_ID, dist1_mod, dist2_mod, YawDiff1_mod, YawDiff2_mod, speed_SGF, yawAngle_axis2, acc_SGF)
+
+
+##### IMPORTANT: here create csv files and 1) delete rows with negative speed_SFG and Extreme values of Acceleration #####
+
+#write.csv(bicycles_112x_variables,"bicycles_112x_variables.csv",row.names=FALSE,col.names=TRUE)
 
 states_112x <- bicycles_112x_variables %>% 
   select(Obj_ID,F, dist1_mod, dist2_mod, YawDiff1_mod, YawDiff2_mod, speed_SGF)
@@ -116,28 +129,96 @@ actions_112x <- bicycles_112x_variables %>%
   select(Obj_ID,F, yawAngle_axis2, acc_SGF)
 
 library(arules)
+states_112x %>% 
+  ggplot(aes(x= dist1_mod))+
+  geom_histogram()
+
+states_112x %>% 
+  ggplot(aes(x= dist2_mod))+
+  geom_histogram()
+
+states_112x %>% 
+  ggplot(aes(x= speed_SGF))+
+  geom_histogram()
+
+states_112x %>% 
+  ggplot(aes(x= YawDiff1_mod))+
+  geom_histogram()
 
 
+states_112x %>% 
+  ggplot(aes(x= YawDiff2_mod))+
+  geom_histogram()
 
-a <- discretize(states_112x$dist1_mod, method = "interval", breaks = 5)
+
+actions_112x %>% 
+  ggplot(aes(x= acc_SGF))+
+  geom_histogram()
+
+actions_112x %>% 
+  ggplot(aes(x= yawAngle_axis2))+
+  geom_histogram()
+
+
+# states calculation 
+
+states_112x_dist1filter <- states_112x %>% 
+  dplyr::filter(dist1_mod < 98)
+states_112x_dist2filter <- states_112x %>% 
+  dplyr::filter(dist2_mod < 98)
+
+states_112x_Nodist1filter <- states_112x %>% 
+  dplyr::filter(dist1_mod > 98)
+states_112x_Nodist2filter <- states_112x %>% 
+  dplyr::filter(dist2_mod > 98)
+
+
+a <- discretize(states_112x_dist1filter$dist1_mod, method = "frequency", breaks = 4)
 write.csv(levels(a),"dist1_Ranges.csv")
-levels(a) <- c(1:5)
+levels(a) <- c(1:4)
+
+b <- as.numeric(a)
+
+states_112x_dist1filter <- states_112x_dist1filter %>% 
+  ungroup() %>% 
+  dplyr::mutate(dist1_disc = b)
 
 
-states_112x <- states_112x %>% ungroup() %>% 
-  dplyr::mutate(dist1_disc = a)
+states_112x_Nodist1filter <- states_112x_Nodist1filter %>% 
+  ungroup() %>% 
+  dplyr::mutate(dist1_disc = 5)
+
+states_112x_dist1 <- full_join(states_112x_dist1filter, states_112x_Nodist1filter)
 
 
 
-a <- discretize(states_112x$dist2_mod, method = "interval", breaks = 5)
+
+a <- discretize(states_112x_dist2filter$dist2_mod, method = "frequency", breaks = 4)
 write.csv(levels(a),"dist2_Ranges.csv")
-levels(a) <- c(1:5)
+levels(a) <- c(1:4)
+
+b <- as.numeric(a)
+
+states_112x_dist2filter <- states_112x_dist2filter %>% 
+  ungroup() %>% 
+  dplyr::mutate(dist2_disc = b)
 
 
-states_112x <- states_112x %>% ungroup() %>% 
-  dplyr::mutate(dist2_disc = a)
+states_112x_Nodist2filter <- states_112x_Nodist2filter %>% 
+  ungroup() %>% 
+  dplyr::mutate(dist2_disc = 5)
 
+states_112x_dist2 <- full_join(states_112x_dist2filter, states_112x_Nodist2filter)
 
+states_112x_dist1 <- states_112x_dist1 %>% arrange(F)
+
+states_112x_dist2 <- states_112x_dist2 %>% arrange(F)
+
+states_112x <- states_112x %>% 
+  ungroup() %>% 
+  arrange(F) %>% 
+  mutate(dist1_disc = states_112x_dist1$dist1_disc,
+         dist2_disc = states_112x_dist2$dist2_disc)
 
 
 
@@ -160,7 +241,7 @@ states_112x <- states_112x %>% ungroup() %>%
   dplyr::mutate(YawDiff2_disc = a)
 
 
-a <- discretize(states_112x$speed_SGF, method = "interval", breaks = 5)
+a <- discretize(states_112x$speed_SGF, method = "frequency", breaks = 5)
 write.csv(levels(a),"speed_SGF_Ranges.csv")
 levels(a) <- c(1:5)
 
@@ -171,6 +252,7 @@ states_112x <- states_112x %>% ungroup() %>%
 
 # Actions discretization
 
+# uSE THE DIFFERWENCE BETWEEN YAWANGLE2 BETWEEN POINT t+1 and point t, after useing moving average of 5 frames,  use moving average for yaw1 and yaw2 (here we can use in states yaw 1 and yaw 2 since it is just following, so no eefect for there values will be given, however on actions is important to incule difference in yaw angle 2 and it represent the addition values to its direction (first smoth it by moving average of 5 frames to reduce the noise))
 a <- discretize(actions_112x$yawAngle_axis2, method = "interval", breaks = 5)
 write.csv(levels(a),"yawAngle_axis2_Ranges.csv")
 levels(a) <- c(1:5)
@@ -180,7 +262,7 @@ actions_112x <- actions_112x %>% ungroup() %>%
   dplyr::mutate(yawAngle_axis2_disc = a)
 
 
-a <- discretize(actions_112x$acc_SGF, method = "interval", breaks = 5)
+a <- discretize(actions_112x$acc_SGF, method = "frequency", breaks = 5)
 write.csv(levels(a),"acc_SGF_Ranges.csv")
 levels(a) <- c(1:5)
 
@@ -189,31 +271,18 @@ actions_112x <- actions_112x %>% ungroup() %>%
   dplyr::mutate(acc_SGF_disc = a)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+##matrices calcualtion 
 
 states_112x <- states_112x %>% 
   dplyr::arrange(dist1_disc, dist2_disc, YawDiff1_disc,YawDiff2_disc,speed_SGF_disc)
 
-
+# give each combination of states a unique number, 
 
 states_112x <- states_112x %>% 
   dplyr::mutate(state_no = (as.numeric(dist1_disc)-1)*625+(as.numeric(dist2_disc)-1)*125+
                   (as.numeric(YawDiff1_disc)-1)*25+
                   (as.numeric(YawDiff2_disc)-1)*5+
-                  as.numeric(speed_SGF_disc))
+                  as.numeric(speed_SGF_disc)-1)
 
 
 
@@ -225,7 +294,7 @@ actions_112x <- actions_112x %>%
 
 actions_112x <- actions_112x %>% 
   dplyr::mutate(action_no = (as.numeric(acc_SGF_disc)-1)*5+
-                  as.numeric(yawAngle_axis2_disc))
+                  as.numeric(yawAngle_axis2_disc)-1)
 
 states_112x <- states_112x %>% 
   arrange(Obj_ID, F)
@@ -237,6 +306,7 @@ actions_112x <- actions_112x %>%
 
 state_action_112x <- data.frame(Obj_ID = states_112x$Obj_ID, F = states_112x$F,state_no = states_112x$state_no, action_no = actions_112x$action_no)
 
+### you can here reduce the length of the trjectories for states and copy also the new IDS to the actions (since same order and number of rows) ""make sure it is first in same order)
 
 state_action_112x <- state_action_112x %>% 
   group_by(Obj_ID) %>% 
@@ -354,6 +424,7 @@ for (i in 1:3125) {
 
 # Create example samples file
 
+########## STOP here ##############
 
 state_action_2mat <- state_action_112x %>% dplyr::group_by(Obj_ID)
 

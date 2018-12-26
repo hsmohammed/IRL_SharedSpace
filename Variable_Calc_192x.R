@@ -93,10 +93,10 @@ Traj_Obj_192x_bicyclesAndPed <- Traj_Obj_192x_bicyclesAndPed %>%
                 dist4 = nth(absoluteDist, 5))
 
 Traj_Obj_192x_bicyclesAndPed <- Traj_Obj_192x_bicyclesAndPed %>% 
-  dplyr::mutate(dist1_mod = ifelse(is.na(dist1), 9999, dist1),
-                dist2_mod = ifelse(is.na(dist2), 9999, dist2),
-                dist3_mod = ifelse(is.na(dist3), 9999, dist3),
-                dist4_mod = ifelse(is.na(dist4), 9999, dist4))
+  dplyr::mutate(dist1_mod = ifelse(is.na(dist1), 99, dist1),
+                dist2_mod = ifelse(is.na(dist2), 99, dist2),
+                dist3_mod = ifelse(is.na(dist3), 99, dist3),
+                dist4_mod = ifelse(is.na(dist4), 99, dist4))
 
 Traj_Obj_192x_bicyclesAndPed <- Traj_Obj_192x_bicyclesAndPed %>% 
   dplyr::mutate(YawDiff1 = nth(YawDiff, 2),

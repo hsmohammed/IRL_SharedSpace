@@ -56,5 +56,9 @@ source("Variable_Calc_191x.R")
 source("Variable_Calc_192x.R")
 
 
-#StateAction (one folder for all data)
+#StateAction (one folder for all data) 5 states and 2 actions 
 source("StateAction_112x.R")
+
+
+#StateAction (one folder for all data) 3 states and 1 actions 
+source("StateAction_112x_onepedvaraiable.R")

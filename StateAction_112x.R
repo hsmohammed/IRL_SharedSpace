@@ -3,7 +3,7 @@
 #   mutate(xgrid = discretize(X_axis2_SGF,method = "fixed" ,breaks = breaksX,labels = seq(1:(length(breaksX)-1)))) %>% 
 #   mutate(ygrid = discretize(Y_axis2_SGF,method = "fixed" ,breaks = breaksY,labels = seq(1:(length(breaksY)-1)))) %>% 
 #   mutate(speedGrid = discretize(speed_SGF,method = "fixed" ,breaks = breaksSpeed,labels = seq(1:(length(breaksSpeed)-1)))) %>% 
-#   mutate(yawGrid = discretize(yawAngle_axis2,method = "fixed" ,breaks = breaksYaw,labels = seq(1:(length(breaksYaw)-1)))) %>% 
+#   mutate(yawGrid = discretize(Yawanglediff_axis2_bike,method = "fixed" ,breaks = breaksYaw,labels = seq(1:(length(breaksYaw)-1)))) %>% 
 #   mutate(accGrid = discretize(acc_SGF,method = "fixed" ,breaks = breaksAcc,labels = seq(1:(length(breaksAcc)-1))))
 # 
 # 
@@ -113,8 +113,19 @@ Traj_Obj_all_bicyclesAndPed <- full_join(Traj_Obj_all_bicyclesAndPed,Traj_Obj_19
 
 Traj_Obj_112x_bicycles <- Traj_Obj_all_bicyclesAndPed %>% dplyr::filter(type == "b")
 
-bicycles_112x_variables <- Traj_Obj_112x_bicycles %>% 
-  dplyr::select(F, Obj_ID, dist1_mod, dist2_mod, YawDiff1_mod, YawDiff2_mod, speed_SGF, yawAngle_axis2, acc_SGF)
+Traj_Obj_112x_bicycles_bikeyawangle2diff<-Traj_Obj_112x_bicycles%>%
+  group_by(Obj_ID) %>% 
+  arrange(F) %>% 
+  mutate(Yawanglediff_axis2_bike=abs(yawAngle_axis2-lead(yawAngle_axis2, default = NA)))
+
+
+Traj_Obj_112x_bicycles_bikeyawangle2diff <- Traj_Obj_112x_bicycles_bikeyawangle2diff[complete.cases(Traj_Obj_112x_bicycles_bikeyawangle2diff$Yawanglediff_axis2_bike),]
+
+Traj_Obj_112x_bicycles_bikeyawangle2diff %>% 
+  ungroup()
+
+bicycles_112x_variables <- Traj_Obj_112x_bicycles_bikeyawangle2diff %>% 
+  dplyr::select(F, Obj_ID, dist1_mod, dist2_mod, YawDiff1_mod, YawDiff2_mod, speed_SGF, Yawanglediff_axis2_bike, acc_SGF)
 
 
 ##### IMPORTANT: here create csv files and 1) delete rows with negative speed_SFG and Extreme values of Acceleration #####
@@ -126,7 +137,7 @@ states_112x <- bicycles_112x_variables %>%
 
 
 actions_112x <- bicycles_112x_variables %>% 
-  select(Obj_ID,F, yawAngle_axis2, acc_SGF)
+  select(Obj_ID,F, Yawanglediff_axis2_bike, acc_SGF)
 
 library(arules)
 states_112x %>% 
@@ -156,7 +167,7 @@ actions_112x %>%
   geom_histogram()
 
 actions_112x %>% 
-  ggplot(aes(x= yawAngle_axis2))+
+  ggplot(aes(x= Yawanglediff_axis2_bike))+
   geom_histogram()
 
 
@@ -253,13 +264,13 @@ states_112x <- states_112x %>% ungroup() %>%
 # Actions discretization
 
 # uSE THE DIFFERWENCE BETWEEN YAWANGLE2 BETWEEN POINT t+1 and point t, after useing moving average of 5 frames,  use moving average for yaw1 and yaw2 (here we can use in states yaw 1 and yaw 2 since it is just following, so no eefect for there values will be given, however on actions is important to incule difference in yaw angle 2 and it represent the addition values to its direction (first smoth it by moving average of 5 frames to reduce the noise))
-a <- discretize(actions_112x$yawAngle_axis2, method = "interval", breaks = 5)
-write.csv(levels(a),"yawAngle_axis2_Ranges.csv")
+a <- discretize(actions_112x$Yawanglediff_axis2_bike, method = "interval", breaks = 5)
+write.csv(levels(a),"Yawanglediff_axis2_bike_Ranges.csv")
 levels(a) <- c(1:5)
 
 
 actions_112x <- actions_112x %>% ungroup() %>% 
-  dplyr::mutate(yawAngle_axis2_disc = a)
+  dplyr::mutate(Yawanglediff_axis2_bike_disc = a)
 
 
 a <- discretize(actions_112x$acc_SGF, method = "frequency", breaks = 5)
@@ -278,23 +289,36 @@ states_112x <- states_112x %>%
 
 # give each combination of states a unique number, 
 
+# original:
+#states_112x <- states_112x %>% 
+ # dplyr::mutate(state_no = (as.numeric(dist1_disc)-1)*625+(as.numeric(dist2_disc)-1)*125+
+  #                (as.numeric(YawDiff1_disc)-1)*25+
+   #               (as.numeric(YawDiff2_disc)-1)*5+
+    #              as.numeric(speed_SGF_disc)-1)
+
+
 states_112x <- states_112x %>% 
-  dplyr::mutate(state_no = (as.numeric(dist1_disc)-1)*625+(as.numeric(dist2_disc)-1)*125+
-                  (as.numeric(YawDiff1_disc)-1)*25+
-                  (as.numeric(YawDiff2_disc)-1)*5+
-                  as.numeric(speed_SGF_disc)-1)
+  dplyr::mutate(state_no = ((as.numeric(dist1_disc)-1)*625)+((as.numeric(dist2_disc)-1)*125)+
+                  ((as.numeric(YawDiff1_disc)-1)*25)+
+                  ((as.numeric(YawDiff2_disc)-1)*5)+
+                  as.numeric(speed_SGF_disc))
 
 
 
 actions_112x <- actions_112x %>% 
-  dplyr::arrange(acc_SGF_disc, yawAngle_axis2_disc)
+  dplyr::arrange(acc_SGF_disc, Yawanglediff_axis2_bike_disc)
 
 
 
+#Original code: 
+  
+#  actions_112x <- actions_112x %>% 
+ # dplyr::mutate(action_no = ((as.numeric(acc_SGF_disc)-1)*5)+
+  #                as.numeric(Yawanglediff_axis2_bike_disc)-1)
 
 actions_112x <- actions_112x %>% 
-  dplyr::mutate(action_no = (as.numeric(acc_SGF_disc)-1)*5+
-                  as.numeric(yawAngle_axis2_disc)-1)
+  dplyr::mutate(action_no = ((as.numeric(acc_SGF_disc)-1)*5)+
+                  as.numeric(Yawanglediff_axis2_bike_disc))
 
 states_112x <- states_112x %>% 
   arrange(Obj_ID, F)
@@ -365,15 +389,15 @@ state_action_112x_6 <- state_action_112x %>%
 state_action6_count <- state_action_112x_6 %>% 
   dplyr::summarise(count = n())
 
-######## here 6615 is the number of rows in state_action_112x ########
+######## here 6561 is the number of rows in state_action_112x ########
 
-for (i in 1:6615) { 
+for (i in 1:6561) { 
   
   trans_prob[state_action_112x$state_no[i],state_action_112x$action_no[i],state_action_112x$state_no_new[i]] = state_action_112x$trans_prob[i]
 }
 
 
-for (i in 1:6615) {
+for (i in 1:6561) {
   
   trans_s[state_action_112x$state_no[i],state_action_112x$action_no[i],state_action_112x$state_no_new[i]] = state_action_112x$state_no_new[i]
 }
@@ -438,16 +462,16 @@ state_action_count <- state_action_2mat %>% dplyr::summarise(count = n())
 ## 55 is number of trajectories 
 ## Rushdi: put number of rows as the number of trajectories (i.e. the number of rows in state_action_count), and the number of columns as the max number in state_action_count column 2
 
-state_mat <- matrix(nrow = 2,ncol = 20)    
-action_mat <- matrix(nrow = 2,ncol = 20) 
+state_mat <- matrix(nrow = 1,ncol = 30)    
+action_mat <- matrix(nrow = 1,ncol = 30) 
 
-for (i in 1:2) {
-state_mat <- matrix(nrow = 2,ncol = 20) 
-action_mat <- matrix(nrow = 2,ncol = 20) }
+for (i in 1:1) {
+state_mat <- matrix(nrow = 1,ncol = 30) 
+action_mat <- matrix(nrow = 1,ncol = 30) }
 
-for (i in 1:2) {
+for (i in 1:1) {
  
-  for (j in 1:20) {  #original 1:state_action_count$count[i]) {
+  for (j in 1:30) {  #original 1:state_action_count$count[i]) {
     
     state_mat[i,j] <- state_action_2mat$state_no[state_action_2mat$Obj_ID == state_action_count$Obj_ID[i]][j]
     action_mat[i,j] <- state_action_2mat$action_no[state_action_2mat$Obj_ID == state_action_count$Obj_ID[i]][j]
@@ -457,7 +481,7 @@ for (i in 1:2) {
 }
 
 
-
+View(state_mat)
 ## original code:
 
 # state_mat <- matrix(nrow = 19,ncol = 7193)    

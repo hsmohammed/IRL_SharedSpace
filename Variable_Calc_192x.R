@@ -83,7 +83,7 @@ Traj_Obj_192x_bicyclesAndPed <- Traj_Obj_192x_bicyclesAndPed %>%
   dplyr::ungroup() %>% 
   dplyr::group_by(F) %>% 
   dplyr::mutate(absoluteDist = sqrt((first(Y_axis2_SGF) - Y_axis2_SGF)^2 + (first(X_axis2_SGF) - X_axis2_SGF)^2)) %>% 
-  dplyr::mutate(YawDiff = first(yawAngle_axis2) - yawAngle_axis2)
+  dplyr::mutate(YawDiff = abs(first(yawAngle_axis2) - yawAngle_axis2))
 
 Traj_Obj_192x_bicyclesAndPed <- Traj_Obj_192x_bicyclesAndPed %>% arrange(F, absoluteDist)
 Traj_Obj_192x_bicyclesAndPed <- Traj_Obj_192x_bicyclesAndPed %>% 

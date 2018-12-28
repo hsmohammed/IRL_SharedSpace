@@ -25,13 +25,18 @@ Traj_Obj_142x_clipped2$Obj_ID <- factor(Traj_Obj_142x_clipped2$Obj_ID)
 
 
 Traj_Obj_142x_clipped2 <- Traj_Obj_142x_clipped2[complete.cases(Traj_Obj_142x_clipped2), ]
+# this code to count small length trajectory to remove it
+#Traj_Obj_142x_clipped_count <- Traj_Obj_142x_clipped2 %>% 
+#  dplyr::group_by(Obj_ID) %>% 
+#  count(Obj_ID)
+
 
 Traj_Obj_142x_clipped2 <- Traj_Obj_142x_clipped2 %>%
   dplyr::group_by(Obj_ID) %>% 
   dplyr::mutate(acc_SGF = sgolayfilt(acc_inst,p = 4,n = 15)) %>% 
   dplyr::mutate(acc_SGF_x = sgolayfilt(acc_inst_x,p = 4,n = 15)) %>% 
   dplyr::mutate(acc_SGF_y = sgolayfilt(acc_inst_y,p = 4,n = 15)) %>% 
-  dplyr::mutate(yawAngle_SGF = sgolayfilt(yawAngle,p = 4,n = 15)) %>% 
+  dplyr::mutate(yawAngle_SGF = sgolayfilt(yawAngle,p = 2,n = 31)) %>% 
   dplyr::mutate(yawRate = (lag(yawAngle_SGF, default = NA )-yawAngle_SGF)*15) 
 
 

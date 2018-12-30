@@ -61,7 +61,7 @@ a <- lm(data = state_reward_AN,formula = reward ~  dist1_mod_disc+
           dist2_mod_disc+
           YawDiff1_mod_disc+
           YawDiff2_mod_disc+
-          speed_SGF_disc)
+          speed_SGF_disc) # -1 if no intercept
 
 summary(a)
 

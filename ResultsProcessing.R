@@ -57,6 +57,14 @@ state_reward_AN$YawDiff1_mod_disc = as.factor(state_reward_AN$YawDiff1_mod_disc)
 state_reward_AN$YawDiff2_mod_disc = as.factor(state_reward_AN$YawDiff2_mod_disc)
 state_reward_AN$speed_SGF_disc = as.factor(state_reward_AN$speed_SGF_disc)
 
+
+state_reward_AN <- within(state_reward_AN, speed_SGF_disc <- relevel(speed_SGF_disc, ref = 3))
+state_reward_AN <- within(state_reward_AN, Long_distance_disc <- relevel(Long_distance_disc, ref = 3))
+state_reward_AN <- within(state_reward_AN, Lateral_distance_disc <- relevel(Lateral_distance_disc, ref = 3))
+state_reward_AN <- within(state_reward_AN, Speed_diff_disc <- relevel(Speed_diff_disc, ref = 3))
+state_reward_AN <- within(state_reward_AN, pathDeviation_disc <- relevel(pathDeviation_disc, ref = 3))
+
+
 a <- lm(data = state_reward_AN,formula = reward ~  dist1_mod_disc+
           dist2_mod_disc+
           YawDiff1_mod_disc+

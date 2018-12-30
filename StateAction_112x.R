@@ -388,8 +388,24 @@ state_action_112x_6 <- state_action_112x %>%
 
 state_action6_count <- state_action_112x_6 %>% 
   dplyr::summarise(count = n())
-
 ######## here 6561 is the number of rows in state_action_112x ########
+
+
+
+#### get the unique number of transition states given a pair if state_action
+State_action_countuniquetransition<-state_action_112x_2 %>% 
+  dplyr::group_by(state_action) %>% 
+  dplyr::arrange(state_action, state_no_new)
+
+State_action_countuniquetransition_1 <- unique(State_action_countuniquetransition)
+
+State_action_countuniquetransition_1 <- State_action_countuniquetransition_1 %>% 
+  dplyr::group_by(state_action) %>% 
+  dplyr::summarise(count = n())
+
+max(State_action_countuniquetransition_1$count)  #### USE THIS NUMBER AS "K" INT THE MATLAB CODE, TO DETERMINE THE SIZE OF THE UNIQUE NEW STATES GIVEN A APIR OF STATE_ACTION
+
+
 
 for (i in 1:6561) { 
   
@@ -462,14 +478,14 @@ state_action_count <- state_action_2mat %>% dplyr::summarise(count = n())
 ## 55 is number of trajectories 
 ## Rushdi: put number of rows as the number of trajectories (i.e. the number of rows in state_action_count), and the number of columns as the max number in state_action_count column 2
 
-state_mat <- matrix(nrow = 1,ncol = 30)    
-action_mat <- matrix(nrow = 1,ncol = 30) 
+state_mat <- matrix(nrow = 9,ncol = 30)    
+action_mat <- matrix(nrow = 9,ncol = 30) 
 
-for (i in 1:1) {
-state_mat <- matrix(nrow = 1,ncol = 30) 
-action_mat <- matrix(nrow = 1,ncol = 30) }
+for (i in 1:9) {
+state_mat <- matrix(nrow = 9,ncol = 30) 
+action_mat <- matrix(nrow = 9,ncol = 30) }
 
-for (i in 1:1) {
+for (i in 1:9) {
  
   for (j in 1:30) {  #original 1:state_action_count$count[i]) {
     
@@ -501,16 +517,21 @@ View(state_mat)
 #   }
 #   
 # }
-writeMat("C:/Users/Rushdi/Desktop/Rushdi work/IRL modeling of shared sapce/New folder/SampleofTrajectoriesAnalysis/state_mat.mat", state_mat = state_mat)
+writeMat("C:/Users/Rushdi/Desktop/Rushdi work/IRL modeling of shared sapce/New folder/SampleofTrajectoriesAnalysis/FULL_TRAN_PROB_3VARSTATES_2VARACTION/state_mat.mat", state_mat = state_mat)
 
-writeMat("C:/Users/Rushdi/Desktop/Rushdi work/IRL modeling of shared sapce/New folder/SampleofTrajectoriesAnalysis/action_mat.mat", action_mat = action_mat)
+writeMat("C:/Users/Rushdi/Desktop/Rushdi work/IRL modeling of shared sapce/New folder/SampleofTrajectoriesAnalysis/FULL_TRAN_PROB_3VARSTATES_2VARACTION/action_mat.mat", action_mat = action_mat)
 
-writeMat("C:/Users/Rushdi/Desktop/Rushdi work/IRL modeling of shared sapce/New folder/SampleofTrajectoriesAnalysis/features_splittable.mat", features_splittable = features_splittable)
+writeMat("C:/Users/Rushdi/Desktop/Rushdi work/IRL modeling of shared sapce/New folder/SampleofTrajectoriesAnalysis/FULL_TRAN_PROB_3VARSTATES_2VARACTION/features_splittable.mat", features_splittable = features_splittable)
 
 
-writeMat("C:/Users/Rushdi/Desktop/Rushdi work/IRL modeling of shared sapce/New folder/SampleofTrajectoriesAnalysis/trans_prob.mat", trans_prob = trans_prob)
+writeMat("C:/Users/Rushdi/Desktop/Rushdi work/IRL modeling of shared sapce/New folder/SampleofTrajectoriesAnalysis/FULL_TRAN_PROB_3VARSTATES_2VARACTION/trans_prob.mat", trans_prob = trans_prob)
 
-writeMat("C:/Users/Rushdi/Desktop/Rushdi work/IRL modeling of shared sapce/New folder/SampleofTrajectoriesAnalysis/trans_s.mat", trans_s = trans_s)
+writeMat("C:/Users/Rushdi/Desktop/Rushdi work/IRL modeling of shared sapce/New folder/SampleofTrajectoriesAnalysis/FULL_TRAN_PROB_3VARSTATES_2VARACTION/trans_s.mat", trans_s = trans_s)
+
+
+write.csv(bicycles_112x_variables,"C:/Users/Rushdi/Desktop/Rushdi work/IRL modeling of shared sapce/New folder/SampleofTrajectoriesAnalysis/FULL_TRAN_PROB_3VARSTATES_2VARACTION/variablesAA.csv")
+
+
 
 state_action_test <- state_action_112x %>% dplyr::filter(Obj_ID %in% BrooklynData_count_test$Obj_ID)
 

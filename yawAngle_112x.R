@@ -35,3 +35,9 @@ Traj_Obj_112x_clipped3 <- Traj_Obj_112x_clipped3 %>%
                                                ifelse(quarter == 3, (pi + atan(abs(deltaX/deltaY)))-2*pi,
                                                       2 * pi - atan(abs(deltaX/deltaY))-2*pi))))
 Traj_Obj_112x_clipped3 <- Traj_Obj_112x_clipped3[complete.cases(Traj_Obj_112x_clipped3),]
+
+
+Traj_Obj_112x_clipped3 %>% 
+  dplyr::filter(Obj_ID == "112x_1111_165") %>% 
+  ggplot(aes(x = F , y = yawAngle_axis2)) +
+  geom_line()

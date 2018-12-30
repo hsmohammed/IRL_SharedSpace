@@ -3,3 +3,12 @@
 - put the world image in the project directory
 - homography
 - add 1 to every trajectory number
+
+
+- smooth yawangle2 (5 frames)
+- use difference in t+1 and t of yawangle 2 for bike 
+- shorten the length of trajectory (through new ID)
+- remove negative speed and extreme values on acceleration
+- to make sure, check yaw angle, does it has noise?
+
+____ Delete rows with extreme values in Yaw diff in states and actions 

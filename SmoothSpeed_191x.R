@@ -31,7 +31,7 @@ Traj_Obj_191x_clipped2 <- Traj_Obj_191x_clipped2 %>%
   dplyr::mutate(acc_SGF = sgolayfilt(acc_inst,p = 4,n = 15)) %>% 
   dplyr::mutate(acc_SGF_x = sgolayfilt(acc_inst_x,p = 4,n = 15)) %>% 
   dplyr::mutate(acc_SGF_y = sgolayfilt(acc_inst_y,p = 4,n = 15)) %>% 
-  dplyr::mutate(yawAngle_SGF = sgolayfilt(yawAngle,p = 4,n = 15)) %>% 
+  dplyr::mutate(yawAngle_SGF = sgolayfilt(yawAngle,p = 2,n = 31)) %>% 
   dplyr::mutate(yawRate = (lag(yawAngle_SGF, default = NA )-yawAngle_SGF)*15) 
 
 

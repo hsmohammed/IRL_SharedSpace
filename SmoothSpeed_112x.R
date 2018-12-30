@@ -31,8 +31,19 @@ Traj_Obj_112x_clipped2 <- Traj_Obj_112x_clipped2 %>%
   dplyr::mutate(acc_SGF = sgolayfilt(acc_inst,p = 4,n = 15)) %>% 
   dplyr::mutate(acc_SGF_x = sgolayfilt(acc_inst_x,p = 4,n = 15)) %>% 
   dplyr::mutate(acc_SGF_y = sgolayfilt(acc_inst_y,p = 4,n = 15)) %>% 
-  dplyr::mutate(yawAngle_SGF = sgolayfilt(yawAngle,p = 4,n = 15)) %>% 
+  dplyr::mutate(yawAngle_SGF = sgolayfilt(yawAngle,p = 2,n = 31)) %>% 
   dplyr::mutate(yawRate = (lag(yawAngle_SGF, default = NA )-yawAngle_SGF)*15) 
+
+
+
+Traj_Obj_112x_clipped2 %>% 
+  dplyr::filter(Obj_ID == "112x_1111_165") %>% 
+  ggplot() +
+  geom_line(aes(x = F , y = yawAngle_SGF), col = "blue")+
+  geom_line(aes(x = F , y = yawAngle), col = "red")
+
+
+plot(Traj_Obj_112x_clipped2$F,Traj_Obj_112x_clipped2$yawRate)
 
 
 Traj_Obj_112x_clipped2 <- Traj_Obj_112x_clipped2[complete.cases(Traj_Obj_112x_clipped2), ]

@@ -40,3 +40,40 @@ for (i in 1:3125) {
     features_splittable[i,25]*5
   
 }
+
+# AN processing
+
+AN_reward = read.csv("fMResult/AN_reward.csv",header = FALSE)
+
+state_reward_AN <- state_lookup %>% 
+  dplyr::mutate(reward = AN_reward[,1])
+
+
+state_reward_AN <- as_tibble(state_reward_AN)
+
+state_reward_AN$dist1_mod_disc = as.factor(state_reward_AN$dist1_mod_disc)
+state_reward_AN$dist2_mod_disc = as.factor(state_reward_AN$dist2_mod_disc)
+state_reward_AN$YawDiff1_mod_disc = as.factor(state_reward_AN$YawDiff1_mod_disc)
+state_reward_AN$YawDiff2_mod_disc = as.factor(state_reward_AN$YawDiff2_mod_disc)
+state_reward_AN$speed_SGF_disc = as.factor(state_reward_AN$speed_SGF_disc)
+
+a <- lm(data = state_reward_AN,formula = reward ~  dist1_mod_disc+
+          dist2_mod_disc+
+          YawDiff1_mod_disc+
+          YawDiff2_mod_disc+
+          speed_SGF_disc)
+
+summary(a)
+
+b <- a$coefficients
+AN_coeff <- as.data.frame(b)
+
+
+write.csv(AN_coeff,"fMResult/AN_coeff.csv")
+
+
+# state_reward_AN <- state_reward_AN %>% 
+#   dplyr::mutate(estReward = predict(a,newdata = state_reward_AN[,2:6]))
+
+
+
